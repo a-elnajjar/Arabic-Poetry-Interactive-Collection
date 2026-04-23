@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
@@ -20,721 +21,728 @@
     --paper: #f2ebdc;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    background: var(--ink);
-    color: var(--paper);
-    font-family: 'Amiri', serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ocean depth background */
-  .sea {
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 10%, rgba(95, 184, 184, 0.08) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 90%, rgba(201, 168, 97, 0.06) 0%, transparent 50%),
-      linear-gradient(180deg, #081424 0%, #0d2340 35%, #13365e 70%, #0a1e38 100%);
-    z-index: -2;
-  }
-
-  /* grain overlay */
-  .sea::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.95, 0 0 0 0 0.87, 0 0 0 0 0.82, 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    opacity: 0.5;
-    mix-blend-mode: overlay;
-    pointer-events: none;
-  }
-
-  /* falling light — "أمطار من ضوء مسموع" */
-  .rain {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .rain span {
-    position: absolute;
-    top: -20px;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, rgba(232, 223, 208, 0.6), transparent);
-    animation: fall linear infinite;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(-20vh); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(120vh); opacity: 0; }
-  }
-
-  /* distant birds */
-  .bird {
-    position: fixed;
-    top: 18%;
-    left: -40px;
-    z-index: -1;
-    opacity: 0.35;
-    animation: drift 60s linear infinite;
-    color: var(--mist);
-  }
-
-  .bird:nth-child(2) { top: 24%; animation-duration: 80s; animation-delay: -20s; opacity: 0.2;}
-  .bird:nth-child(3) { top: 14%; animation-duration: 95s; animation-delay: -45s; opacity: 0.28;}
-
-  @keyframes drift {
-    to { transform: translateX(110vw); }
-  }
-
-  /* layout */
-  .stage {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 8vh 6vw;
-    position: relative;
-  }
-
-  /* top ornament */
-  .ornament {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    color: var(--gold);
-    opacity: 0;
-    animation: fadeIn 2s 0.2s ease forwards;
-  }
-
-  .ornament .line {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .ornament .diamond {
-    width: 6px; height: 6px;
-    background: var(--gold);
-    transform: rotate(45deg);
-    box-shadow: 0 0 8px rgba(201, 168, 97, 0.6);
-  }
-
-  /* eyebrow */
-  .eyebrow {
-    font-family: 'Marcellus', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.5em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-top: 1.5rem;
-    opacity: 0;
-    animation: fadeIn 2s 0.8s ease forwards;
-  }
-
-  /* title */
-  .title {
-    font-family: 'Amiri', serif;
-    font-weight: 700;
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
-    line-height: 1;
-    color: var(--paper);
-    margin-top: 1.2rem;
-    margin-bottom: 0.6rem;
-    text-align: center;
-    opacity: 0;
-    animation: riseUp 2s 1.2s ease forwards;
-    text-shadow: 0 2px 40px rgba(95, 184, 184, 0.2);
-  }
-
-  .title .word {
-    display: inline-block;
-    position: relative;
-  }
-
-  .title .word::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    right: 50%;
-    transform: translateX(50%);
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.5;
-  }
-
-  .byline {
-    font-family: 'Amiri', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--mist);
-    margin-top: 2.5rem;
-    opacity: 0;
-    animation: fadeIn 2s 1.8s ease forwards;
-  }
-
-  /* scroll cue */
-  .scroll-cue {
-    position: absolute;
-    bottom: 4vh;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Marcellus', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.4em;
-    color: var(--mist);
-    opacity: 0;
-    animation: fadeIn 2s 2.5s ease forwards, pulse 2s 3s ease infinite;
-    writing-mode: vertical-rl;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-
-  /* poem section */
-  .poem {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 10vh 6vw 14vh;
-    position: relative;
-  }
-
-  .stanza {
-    margin-bottom: 7rem;
-    position: relative;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1.5s ease;
-  }
-
-  .stanza.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .stanza-num {
-    font-family: 'Marcellus', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    color: var(--gold);
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .stanza-num::before {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.6;
-  }
-
-  .verse {
-    font-family: 'Amiri', serif;
-    font-size: clamp(1.4rem, 2.6vw, 1.95rem);
-    line-height: 2.2;
-    color: var(--paper);
-    text-align: right;
-    letter-spacing: 0.01em;
-  }
-
-  .verse .line {
-    display: block;
-    position: relative;
-    padding-right: 1rem;
-    transition: all 0.4s ease;
-  }
-
-  .verse .line:hover {
-    color: var(--turquoise);
-    padding-right: 1.4rem;
-  }
-
-  .verse .refrain {
-    color: var(--gold);
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .verse .refrain.big {
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    text-align: center;
-    display: block;
-    padding: 2rem 0;
-    letter-spacing: 0.03em;
-    text-shadow: 0 0 30px rgba(201, 168, 97, 0.3);
-  }
-
-  .stanza.opening {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .stanza.final .verse {
-    border-right: 2px solid var(--gold);
-    padding-right: 1.5rem;
-    margin-right: -0.5rem;
-  }
-
-  .stanza.final .stanza-num {
-    color: var(--turquoise);
-  }
-
-  .stanza.final .stanza-num::before {
-    background: var(--turquoise);
-  }
-
-  .verse .accent {
-    color: var(--turquoise);
-  }
-
-  /* decorative separator */
-  .divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 4rem auto;
-    color: var(--gold);
-    opacity: 0.6;
-  }
-
-  .divider .wave {
-    font-size: 1.2rem;
-    letter-spacing: 0.3em;
-  }
-
-  .divider .line {
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  /* footer */
-  .footer {
-    text-align: center;
-    padding: 6vh 2rem 10vh;
-    border-top: 1px solid rgba(201, 168, 97, 0.15);
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .footer .signature {
-    font-family: 'Amiri', serif;
-    font-style: italic;
-    font-size: 1.6rem;
-    color: var(--paper);
-    margin-bottom: 0.8rem;
-  }
-
-  .footer .meta {
-    font-family: 'Marcellus', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    color: var(--mist);
-    text-transform: uppercase;
-  }
-
-  /* animations */
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-
-  @keyframes riseUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* decorative ship silhouette */
-  .ship {
-    position: absolute;
-    bottom: 20%;
-    left: -60px;
-    width: 80px;
-    opacity: 0.15;
-    color: var(--pearl);
-    animation: sail 90s linear infinite;
-  }
-
-  @keyframes sail {
-    to { transform: translateX(110vw); }
-  }
-
-  /* turquoise glow spots — "مراكب حبلى بالفيروز" */
-  .glow {
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(95, 184, 184, 0.08) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: -1;
-    filter: blur(40px);
-  }
-
-  .glow.a { top: 20%; right: 5%; animation: breathe 8s ease-in-out infinite; }
-  .glow.b { bottom: 10%; left: 10%; animation: breathe 12s ease-in-out infinite reverse; }
-
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.2); opacity: 1; }
-  }
-
-  @media (max-width: 600px) {
-    .verse { font-size: 1.35rem; line-height: 2; }
-    .stanza { margin-bottom: 5rem; }
-  }
-
-  /* ============ INTERACTIVITY ============ */
-
-  /* custom cursor — a small compass/star */
-  body {
-    cursor: none;
-  }
-  @media (max-width: 768px) {
-    body { cursor: auto; }
-    .cursor, .cursor-trail { display: none !important; }
-  }
-
-  .cursor {
-    position: fixed;
-    top: 0; left: 0;
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
-    mix-blend-mode: screen;
-  }
-
-  .cursor svg {
-    width: 100%;
-    height: 100%;
-    animation: cursorSpin 8s linear infinite;
-  }
-
-  .cursor.hover {
-    width: 50px;
-    height: 50px;
-  }
-
-  .cursor.hover svg {
-    animation-duration: 3s;
-  }
-
-  @keyframes cursorSpin {
-    to { transform: rotate(360deg); }
-  }
-
-  .cursor-trail {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--turquoise);
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    opacity: 0.8;
-    animation: trailFade 1.2s ease-out forwards;
-  }
-
-  @keyframes trailFade {
-    to {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(3);
-    }
-  }
-
-  /* click ripple — concentric circles like a stone in water */
-  .ripple {
-    position: fixed;
-    border: 1px solid var(--turquoise);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9997;
-    transform: translate(-50%, -50%);
-    animation: rippleOut 1.4s ease-out forwards;
-  }
-
-  @keyframes rippleOut {
-    0% {
-      width: 0; height: 0;
-      opacity: 0.8;
-      border-width: 2px;
-    }
-    100% {
-      width: 250px; height: 250px;
-      opacity: 0;
-      border-width: 0.5px;
-    }
-  }
-
-  /* constellation canvas */
-  #constellation {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.6;
-  }
-
-  /* sound toggle */
-  .sound-toggle {
-    position: fixed;
-    top: 2rem;
-    left: 2rem;
-    z-index: 100;
-    background: rgba(10, 22, 40, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(201, 168, 97, 0.3);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: none;
-    color: var(--gold);
-    transition: all 0.3s ease;
-    opacity: 0;
-    animation: fadeIn 2s 3s ease forwards;
-  }
-
-  .sound-toggle:hover {
-    background: rgba(201, 168, 97, 0.15);
-    transform: scale(1.1);
-  }
-
-  .sound-toggle svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .sound-toggle .wave-anim {
-    display: none;
-  }
-
-  .sound-toggle.playing .wave-anim {
-    display: inline;
-    animation: soundWave 1.2s ease-in-out infinite;
-    transform-origin: center;
-  }
-
-  .sound-toggle.playing .wave-anim.w2 {
-    animation-delay: 0.2s;
-  }
-
-  .sound-toggle.playing .wave-anim.w3 {
-    animation-delay: 0.4s;
-  }
-
-  @keyframes soundWave {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
-  /* line hover — gentle tilt + glow */
-  .verse .line {
-    display: block;
-    position: relative;
-    padding-right: 1rem;
-    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    cursor: none;
-  }
-
-  .verse .line:hover {
-    color: var(--turquoise);
-    padding-right: 1.8rem;
-    text-shadow: 0 0 20px rgba(95, 184, 184, 0.5);
-    transform: translateX(-8px);
-    letter-spacing: 0.02em;
-  }
-
-  /* line reveal marker — a small drop that appears on hover */
-  .verse .line::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--turquoise);
-    transform: translateY(-50%) scale(0);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 0 12px var(--turquoise);
-  }
-
-  .verse .line:hover::before {
-    transform: translateY(-50%) scale(1);
-  }
-
-  /* remove padding override from refrain.big */
-  .verse .refrain.big:hover {
-    padding-right: 0;
-    transform: none;
-  }
-
-  /* ============ LANGUAGE TOGGLE ============ */
-  .lang-toggle {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
-    z-index: 100;
-    background: rgba(10, 22, 40, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(201, 168, 97, 0.3);
-    border-radius: 40px;
-    padding: 6px;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    cursor: none;
-    opacity: 0;
-    animation: fadeIn 2s 3s ease forwards;
-    font-family: 'Marcellus', serif;
-  }
-
-  .lang-toggle button {
-    background: none;
-    border: none;
-    color: var(--mist);
-    font-family: 'Marcellus', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    padding: 8px 16px;
-    border-radius: 30px;
-    cursor: none;
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    position: relative;
-    z-index: 2;
-  }
-
-  .lang-toggle button.ar {
-    font-family: 'Amiri', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0;
-  }
-
-  .lang-toggle .slider {
-    position: absolute;
-    top: 6px;
-    bottom: 6px;
-    background: linear-gradient(135deg, var(--gold), #b8934d);
-    border-radius: 30px;
-    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 2px 12px rgba(201, 168, 97, 0.3);
-    z-index: 1;
-  }
-
-  .lang-toggle.ar .slider {
-    right: 6px;
-    left: 50%;
-  }
-
-  .lang-toggle.en .slider {
-    right: 50%;
-    left: 6px;
-  }
-
-  .lang-toggle button.active {
-    color: var(--ink);
-    font-weight: 600;
-  }
-
-  /* Adjust sound toggle position so it doesn't collide */
-  .sound-toggle {
-    top: 2rem;
-    left: 2rem;
-  }
-
-  /* ============ BILINGUAL CONTENT ============ */
-  /* English body uses a different font family */
-  body.en-mode {
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  body.en-mode .verse {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    text-align: left;
-    direction: ltr;
-  }
-
-  body.en-mode .verse .line {
-    padding-right: 0;
-    padding-left: 1rem;
-  }
-
-  body.en-mode .verse .line:hover {
-    padding-right: 0;
-    padding-left: 1.8rem;
-    transform: translateX(8px);
-  }
-
-  body.en-mode .verse .line::before {
-    right: auto;
-    left: 0;
-  }
-
-  body.en-mode .stanza-num::before {
-    /* flip the leading line */
-  }
-
-  body.en-mode .byline,
-  body.en-mode .title,
-  body.en-mode .verse .refrain.big,
-  body.en-mode .signature {
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  body.en-mode .eyebrow,
-  body.en-mode .ornament,
-  body.en-mode .footer .meta {
-    /* keep as is */
-  }
-
-  /* content visibility */
-  .ar-content { display: block; }
-  .en-content { display: none; }
-
-  body.en-mode {
-    direction: ltr;
-  }
-  body.en-mode .ar-content { display: none; }
-  body.en-mode .en-content { display: block; }
-
-  body.en-mode .stanza-num {
-    font-family: 'Marcellus', serif;
-  }
-
-  /* Smooth fade when switching */
-  .poem, .stage, .footer {
-    transition: opacity 0.3s ease;
-  }
-
-  body.switching .poem,
-  body.switching .stage,
-  body.switching .footer {
-    opacity: 0;
-  }
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+background: var(–ink);
+color: var(–paper);
+font-family: ‘Amiri’, serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* ocean depth background */
+.sea {
+position: fixed;
+inset: 0;
+background:
+radial-gradient(ellipse at 20% 10%, rgba(95, 184, 184, 0.08) 0%, transparent 40%),
+radial-gradient(ellipse at 80% 90%, rgba(201, 168, 97, 0.06) 0%, transparent 50%),
+linear-gradient(180deg, #081424 0%, #0d2340 35%, #13365e 70%, #0a1e38 100%);
+z-index: -2;
+}
+
+/* grain overlay */
+.sea::after {
+content: ‘’;
+position: absolute;
+inset: 0;
+background-image: url(“data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.95, 0 0 0 0 0.87, 0 0 0 0 0.82, 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>”);
+opacity: 0.5;
+mix-blend-mode: overlay;
+pointer-events: none;
+}
+
+/* falling light — “أمطار من ضوء مسموع” */
+.rain {
+position: fixed;
+inset: 0;
+z-index: 0;
+pointer-events: none;
+overflow: hidden;
+}
+
+.rain span {
+position: absolute;
+top: 0;
+width: 1.5px;
+background: linear-gradient(180deg, transparent, rgba(232, 223, 208, 0.9) 50%, transparent);
+animation: fall linear infinite;
+box-shadow: 0 0 4px rgba(232, 223, 208, 0.5);
+will-change: transform;
+}
+
+@keyframes fall {
+0% { transform: translateY(-20vh); opacity: 0; }
+10% { opacity: 1; }
+90% { opacity: 1; }
+100% { transform: translateY(120vh); opacity: 0; }
+}
+
+/* distant birds */
+.bird {
+position: fixed;
+top: 18%;
+left: -40px;
+z-index: -1;
+opacity: 0.35;
+animation: drift 60s linear infinite;
+color: var(–mist);
+}
+
+.bird:nth-child(2) { top: 24%; animation-duration: 80s; animation-delay: -20s; opacity: 0.2;}
+.bird:nth-child(3) { top: 14%; animation-duration: 95s; animation-delay: -45s; opacity: 0.28;}
+
+@keyframes drift {
+to { transform: translateX(110vw); }
+}
+
+/* layout */
+.stage {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 8vh 6vw;
+position: relative;
+z-index: 2;
+}
+
+/* top ornament */
+.ornament {
+display: flex;
+align-items: center;
+gap: 1.2rem;
+color: var(–gold);
+opacity: 0;
+animation: fadeIn 2s 0.2s ease forwards;
+}
+
+.ornament .line {
+width: 60px;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–gold), transparent);
+}
+
+.ornament .diamond {
+width: 6px; height: 6px;
+background: var(–gold);
+transform: rotate(45deg);
+box-shadow: 0 0 8px rgba(201, 168, 97, 0.6);
+}
+
+/* eyebrow */
+.eyebrow {
+font-family: ‘Marcellus’, serif;
+font-size: 0.72rem;
+letter-spacing: 0.5em;
+color: var(–gold);
+text-transform: uppercase;
+margin-top: 1.5rem;
+opacity: 0;
+animation: fadeIn 2s 0.8s ease forwards;
+}
+
+/* title */
+.title {
+font-family: ‘Amiri’, serif;
+font-weight: 700;
+font-size: clamp(2.8rem, 7vw, 5.5rem);
+line-height: 1;
+color: var(–paper);
+margin-top: 1.2rem;
+margin-bottom: 0.6rem;
+text-align: center;
+opacity: 0;
+animation: riseUp 2s 1.2s ease forwards;
+text-shadow: 0 2px 40px rgba(95, 184, 184, 0.2);
+}
+
+.title .word {
+display: inline-block;
+position: relative;
+}
+
+.title .word::after {
+content: ‘’;
+position: absolute;
+bottom: -10px;
+right: 50%;
+transform: translateX(50%);
+width: 40px;
+height: 1px;
+background: var(–gold);
+opacity: 0.5;
+}
+
+.byline {
+font-family: ‘Amiri’, serif;
+font-style: italic;
+font-size: 1.1rem;
+color: var(–mist);
+margin-top: 2.5rem;
+opacity: 0;
+animation: fadeIn 2s 1.8s ease forwards;
+}
+
+/* scroll cue */
+.scroll-cue {
+position: absolute;
+bottom: 4vh;
+left: 50%;
+transform: translateX(-50%);
+font-family: ‘Marcellus’, serif;
+font-size: 0.65rem;
+letter-spacing: 0.4em;
+color: var(–mist);
+opacity: 0;
+animation: fadeIn 2s 2.5s ease forwards, pulse 2s 3s ease infinite;
+writing-mode: vertical-rl;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 0.4; }
+50% { opacity: 1; }
+}
+
+/* poem section */
+.poem {
+max-width: 780px;
+margin: 0 auto;
+padding: 10vh 6vw 14vh;
+position: relative;
+z-index: 2;
+}
+
+.stanza {
+margin-bottom: 7rem;
+position: relative;
+opacity: 0;
+transform: translateY(30px);
+transition: all 1.5s ease;
+}
+
+.stanza.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+.stanza-num {
+font-family: ‘Marcellus’, serif;
+font-size: 0.7rem;
+letter-spacing: 0.4em;
+color: var(–gold);
+margin-bottom: 2rem;
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.stanza-num::before {
+content: ‘’;
+width: 40px;
+height: 1px;
+background: var(–gold);
+opacity: 0.6;
+}
+
+.verse {
+font-family: ‘Amiri’, serif;
+font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+line-height: 2.2;
+color: var(–paper);
+text-align: right;
+letter-spacing: 0.01em;
+}
+
+.verse .line {
+display: block;
+position: relative;
+padding-right: 1rem;
+transition: all 0.4s ease;
+}
+
+.verse .line:hover {
+color: var(–turquoise);
+padding-right: 1.4rem;
+}
+
+.verse .refrain {
+color: var(–gold);
+font-style: italic;
+font-weight: 400;
+}
+
+.verse .refrain.big {
+font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+text-align: center;
+display: block;
+padding: 2rem 0;
+letter-spacing: 0.03em;
+text-shadow: 0 0 30px rgba(201, 168, 97, 0.3);
+}
+
+.stanza.opening {
+text-align: center;
+margin-bottom: 4rem;
+}
+
+.stanza.final .verse {
+border-right: 2px solid var(–gold);
+padding-right: 1.5rem;
+margin-right: -0.5rem;
+}
+
+.stanza.final .stanza-num {
+color: var(–turquoise);
+}
+
+.stanza.final .stanza-num::before {
+background: var(–turquoise);
+}
+
+.verse .accent {
+color: var(–turquoise);
+}
+
+/* decorative separator */
+.divider {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1rem;
+margin: 4rem auto;
+color: var(–gold);
+opacity: 0.6;
+}
+
+.divider .wave {
+font-size: 1.2rem;
+letter-spacing: 0.3em;
+}
+
+.divider .line {
+width: 80px;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–gold), transparent);
+}
+
+/* footer */
+.footer {
+text-align: center;
+padding: 6vh 2rem 10vh;
+border-top: 1px solid rgba(201, 168, 97, 0.15);
+max-width: 600px;
+margin: 0 auto;
+position: relative;
+z-index: 2;
+}
+
+.footer .signature {
+font-family: ‘Amiri’, serif;
+font-style: italic;
+font-size: 1.6rem;
+color: var(–paper);
+margin-bottom: 0.8rem;
+}
+
+.footer .meta {
+font-family: ‘Marcellus’, serif;
+font-size: 0.7rem;
+letter-spacing: 0.4em;
+color: var(–mist);
+text-transform: uppercase;
+}
+
+/* animations */
+@keyframes fadeIn {
+to { opacity: 1; }
+}
+
+@keyframes riseUp {
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* decorative ship silhouette */
+.ship {
+position: absolute;
+bottom: 20%;
+left: -60px;
+width: 80px;
+opacity: 0.15;
+color: var(–pearl);
+animation: sail 90s linear infinite;
+}
+
+@keyframes sail {
+to { transform: translateX(110vw); }
+}
+
+/* turquoise glow spots — “مراكب حبلى بالفيروز” */
+.glow {
+position: fixed;
+width: 300px;
+height: 300px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(95, 184, 184, 0.08) 0%, transparent 60%);
+pointer-events: none;
+z-index: -1;
+filter: blur(40px);
+}
+
+.glow.a { top: 20%; right: 5%; animation: breathe 8s ease-in-out infinite; }
+.glow.b { bottom: 10%; left: 10%; animation: breathe 12s ease-in-out infinite reverse; }
+
+@keyframes breathe {
+0%, 100% { transform: scale(1); opacity: 0.5; }
+50% { transform: scale(1.2); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+.verse { font-size: 1.35rem; line-height: 2; }
+.stanza { margin-bottom: 5rem; }
+}
+
+/* ============ INTERACTIVITY ============ */
+
+/* custom cursor — a small compass/star */
+body {
+cursor: none;
+}
+@media (max-width: 768px) {
+body { cursor: auto; }
+.cursor, .cursor-trail { display: none !important; }
+}
+
+.cursor {
+position: fixed;
+top: 0; left: 0;
+width: 24px;
+height: 24px;
+pointer-events: none;
+z-index: 9999;
+transform: translate(-50%, -50%);
+transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+mix-blend-mode: screen;
+}
+
+.cursor svg {
+width: 100%;
+height: 100%;
+animation: cursorSpin 8s linear infinite;
+}
+
+.cursor.hover {
+width: 50px;
+height: 50px;
+}
+
+.cursor.hover svg {
+animation-duration: 3s;
+}
+
+@keyframes cursorSpin {
+to { transform: rotate(360deg); }
+}
+
+.cursor-trail {
+position: fixed;
+width: 4px;
+height: 4px;
+border-radius: 50%;
+background: var(–turquoise);
+pointer-events: none;
+z-index: 9998;
+transform: translate(-50%, -50%);
+opacity: 0.8;
+animation: trailFade 1.2s ease-out forwards;
+}
+
+@keyframes trailFade {
+to {
+opacity: 0;
+transform: translate(-50%, -50%) scale(3);
+}
+}
+
+/* click ripple — concentric circles like a stone in water */
+.ripple {
+position: fixed;
+border: 1px solid var(–turquoise);
+border-radius: 50%;
+pointer-events: none;
+z-index: 9997;
+transform: translate(-50%, -50%);
+animation: rippleOut 1.4s ease-out forwards;
+}
+
+@keyframes rippleOut {
+0% {
+width: 0; height: 0;
+opacity: 0.8;
+border-width: 2px;
+}
+100% {
+width: 250px; height: 250px;
+opacity: 0;
+border-width: 0.5px;
+}
+}
+
+/* constellation canvas */
+#constellation {
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: -1;
+opacity: 0.6;
+}
+
+/* sound toggle */
+.sound-toggle {
+position: fixed;
+top: 2rem;
+left: 2rem;
+z-index: 100;
+background: rgba(10, 22, 40, 0.6);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+border: 1px solid rgba(201, 168, 97, 0.3);
+border-radius: 50%;
+width: 50px;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: none;
+color: var(–gold);
+transition: all 0.3s ease;
+opacity: 0;
+animation: fadeIn 2s 3s ease forwards;
+}
+
+.sound-toggle:hover {
+background: rgba(201, 168, 97, 0.15);
+transform: scale(1.1);
+}
+
+.sound-toggle svg {
+width: 20px;
+height: 20px;
+}
+
+.sound-toggle .wave-anim {
+display: none;
+}
+
+.sound-toggle.playing .wave-anim {
+display: inline;
+animation: soundWave 1.2s ease-in-out infinite;
+transform-origin: center;
+}
+
+.sound-toggle.playing .wave-anim.w2 {
+animation-delay: 0.2s;
+}
+
+.sound-toggle.playing .wave-anim.w3 {
+animation-delay: 0.4s;
+}
+
+@keyframes soundWave {
+0%, 100% { opacity: 0.3; }
+50% { opacity: 1; }
+}
+
+/* line hover — gentle tilt + glow */
+.verse .line {
+display: block;
+position: relative;
+padding-right: 1rem;
+transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+cursor: none;
+}
+
+.verse .line:hover {
+color: var(–turquoise);
+padding-right: 1.8rem;
+text-shadow: 0 0 20px rgba(95, 184, 184, 0.5);
+transform: translateX(-8px);
+letter-spacing: 0.02em;
+}
+
+/* line reveal marker — a small drop that appears on hover */
+.verse .line::before {
+content: ‘’;
+position: absolute;
+right: 0;
+top: 50%;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(–turquoise);
+transform: translateY(-50%) scale(0);
+transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+box-shadow: 0 0 12px var(–turquoise);
+}
+
+.verse .line:hover::before {
+transform: translateY(-50%) scale(1);
+}
+
+/* remove padding override from refrain.big */
+.verse .refrain.big:hover {
+padding-right: 0;
+transform: none;
+}
+
+/* ============ LANGUAGE TOGGLE ============ */
+.lang-toggle {
+position: fixed;
+top: 2rem;
+right: 2rem;
+z-index: 100;
+background: rgba(10, 22, 40, 0.6);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+border: 1px solid rgba(201, 168, 97, 0.3);
+border-radius: 40px;
+padding: 6px;
+display: flex;
+align-items: center;
+gap: 0;
+cursor: none;
+opacity: 0;
+animation: fadeIn 2s 3s ease forwards;
+font-family: ‘Marcellus’, serif;
+}
+
+.lang-toggle button {
+background: none;
+border: none;
+color: var(–mist);
+font-family: ‘Marcellus’, serif;
+font-size: 0.75rem;
+letter-spacing: 0.15em;
+padding: 8px 16px;
+border-radius: 30px;
+cursor: none;
+transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+position: relative;
+z-index: 2;
+}
+
+.lang-toggle button.ar {
+font-family: ‘Amiri’, serif;
+font-size: 0.95rem;
+letter-spacing: 0;
+}
+
+.lang-toggle .slider {
+position: absolute;
+top: 6px;
+bottom: 6px;
+background: linear-gradient(135deg, var(–gold), #b8934d);
+border-radius: 30px;
+transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+box-shadow: 0 2px 12px rgba(201, 168, 97, 0.3);
+z-index: 1;
+}
+
+.lang-toggle.ar .slider {
+right: 6px;
+left: 50%;
+}
+
+.lang-toggle.en .slider {
+right: 50%;
+left: 6px;
+}
+
+.lang-toggle button.active {
+color: var(–ink);
+font-weight: 600;
+}
+
+/* Adjust sound toggle position so it doesn’t collide */
+.sound-toggle {
+top: 2rem;
+left: 2rem;
+}
+
+/* ============ BILINGUAL CONTENT ============ */
+/* English body uses a different font family */
+body.en-mode {
+font-family: ‘Cormorant Garamond’, serif;
+}
+
+body.en-mode .verse {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 300;
+text-align: left;
+direction: ltr;
+}
+
+body.en-mode .verse .line {
+padding-right: 0;
+padding-left: 1rem;
+}
+
+body.en-mode .verse .line:hover {
+padding-right: 0;
+padding-left: 1.8rem;
+transform: translateX(8px);
+}
+
+body.en-mode .verse .line::before {
+right: auto;
+left: 0;
+}
+
+body.en-mode .stanza-num::before {
+/* flip the leading line */
+}
+
+body.en-mode .byline,
+body.en-mode .title,
+body.en-mode .verse .refrain.big,
+body.en-mode .signature {
+font-family: ‘Cormorant Garamond’, serif;
+}
+
+body.en-mode .eyebrow,
+body.en-mode .ornament,
+body.en-mode .footer .meta {
+/* keep as is */
+}
+
+/* content visibility */
+.ar-content { display: block; }
+.en-content { display: none; }
+
+body.en-mode {
+direction: ltr;
+}
+body.en-mode .ar-content { display: none; }
+body.en-mode .en-content { display: block; }
+
+body.en-mode .stanza-num {
+font-family: ‘Marcellus’, serif;
+}
+
+/* Smooth fade when switching */
+.poem, .stage, .footer {
+transition: opacity 0.3s ease;
+}
+
+body.switching .poem,
+body.switching .stage,
+body.switching .footer {
+opacity: 0;
+}
 </style>
+
 </head>
 <body>
 
@@ -743,9 +751,11 @@
 <div class="glow b"></div>
 
 <!-- constellation canvas — "أصيد ملايين الأقمار" -->
+
 <canvas id="constellation"></canvas>
 
 <!-- custom compass cursor -->
+
 <div class="cursor" id="cursor">
   <svg viewBox="0 0 24 24" fill="none">
     <circle cx="12" cy="12" r="11" stroke="#c9a861" stroke-width="0.6" opacity="0.6"/>
@@ -757,6 +767,7 @@
 </div>
 
 <!-- sound toggle -->
+
 <button class="sound-toggle" id="soundToggle" aria-label="تشغيل/إيقاف صوت البحر">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M11 5 L6 9 H2 V15 H6 L11 19 Z"/>
@@ -767,6 +778,7 @@
 </button>
 
 <!-- language toggle -->
+
 <div class="lang-toggle ar" id="langToggle">
   <div class="slider"></div>
   <button class="en" data-lang="en">EN</button>
@@ -774,9 +786,11 @@
 </div>
 
 <!-- falling light -->
+
 <div class="rain" id="rain"></div>
 
 <!-- birds -->
+
 <svg class="bird" width="28" height="10" viewBox="0 0 28 10" fill="none">
   <path d="M1 8 Q 6 1, 12 6 Q 18 1, 27 8" stroke="currentColor" stroke-width="1" fill="none"/>
 </svg>
@@ -788,12 +802,14 @@
 </svg>
 
 <!-- distant sailboat -->
+
 <svg class="ship" viewBox="0 0 80 80" fill="none">
   <path d="M40 10 L40 55 L15 55 L25 65 L55 65 L65 55 L40 55" stroke="currentColor" stroke-width="0.8" fill="none"/>
   <path d="M40 15 L58 52 L40 52 Z" stroke="currentColor" stroke-width="0.8" fill="none"/>
 </svg>
 
 <!-- HERO -->
+
 <section class="stage">
   <div class="ornament">
     <div class="line"></div>
@@ -817,9 +833,11 @@
 </section>
 
 <!-- POEM -->
+
 <section class="poem">
 
   <!-- Opening refrain -->
+
   <div class="stanza opening" data-stanza>
     <div class="verse">
       <span class="line refrain big ar-content">في مرفأ عينيكِ الأزرق</span>
@@ -834,6 +852,7 @@
   </div>
 
   <!-- STANZA I -->
+
   <div class="stanza" data-stanza>
     <div class="stanza-num">I</div>
     <div class="verse ar-content">
@@ -857,6 +876,7 @@
   </div>
 
   <!-- STANZA II -->
+
   <div class="stanza" data-stanza>
     <div class="stanza-num">II</div>
     <div class="verse ar-content">
@@ -880,6 +900,7 @@
   </div>
 
   <!-- STANZA III -->
+
   <div class="stanza" data-stanza>
     <div class="stanza-num">III</div>
     <div class="verse ar-content">
@@ -903,6 +924,7 @@
   </div>
 
   <!-- STANZA IV -->
+
   <div class="stanza" data-stanza>
     <div class="stanza-num">IV</div>
     <div class="verse ar-content">
@@ -926,6 +948,7 @@
   </div>
 
   <!-- STANZA V -->
+
   <div class="stanza" data-stanza>
     <div class="stanza-num">V</div>
     <div class="verse ar-content">
@@ -949,6 +972,7 @@
   </div>
 
   <!-- STANZA VI -->
+
   <div class="stanza" data-stanza>
     <div class="stanza-num">VI</div>
     <div class="verse ar-content">
@@ -972,6 +996,7 @@
   </div>
 
   <!-- STANZA VII — final -->
+
   <div class="stanza final" data-stanza>
     <div class="stanza-num ar-content">VII · الخاتمة</div>
     <div class="stanza-num en-content">VII · Envoi</div>

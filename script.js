@@ -1,17 +1,18 @@
-// ============ FALLING LIGHT ============
-const rain = document.getElementById('rain');
-for (let i = 0; i < 60; i++) {
-  const drop = document.createElement('span');
-  const h = 30 + Math.random() * 80;
-  const dur = 3 + Math.random() * 5;
-  const delay = Math.random() * 5;
-  drop.style.left = Math.random() * 100 + '%';
-  drop.style.height = h + 'px';
-  drop.style.animationDuration = dur + 's';
-  drop.style.animationDelay = -delay + 's';
-  drop.style.opacity = 0.3 + Math.random() * 0.5;
-  rain.appendChild(drop);
-}
+(() => {
+  // ============ FALLING LIGHT ============
+  const rain = document.getElementById('rain');
+  for (let i = 0; i < 60; i++) {
+    const drop = document.createElement('span');
+    const h = 30 + Math.random() * 80;
+    const dur = 3 + Math.random() * 5;
+    const delay = Math.random() * 5;
+    drop.style.left = Math.random() * 100 + '%';
+    drop.style.height = h + 'px';
+    drop.style.animationDuration = dur + 's';
+    drop.style.animationDelay = -delay + 's';
+    drop.style.opacity = 0.3 + Math.random() * 0.5;
+    rain.appendChild(drop);
+  }
 
 // ============ STANZA REVEAL ON SCROLL ============
 const io = new IntersectionObserver((entries) => {
@@ -225,35 +226,36 @@ const langButtons = langToggle.querySelectorAll('button');
 const html = document.documentElement;
 const body = document.body;
 
-langButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const lang = btn.dataset.lang;
-    const currentLang = body.classList.contains('en-mode') ? 'en' : 'ar';
-    if (lang === currentLang) return;
+  langButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      const currentLang = body.classList.contains('en-mode') ? 'en' : 'ar';
+      if (lang === currentLang) return;
 
     // fade out -> switch -> fade in
-    body.classList.add('switching');
+      body.classList.add('switching');
 
-    setTimeout(() => {
-      if (lang === 'en') {
-        body.classList.add('en-mode');
-        html.setAttribute('lang', 'en');
-        html.setAttribute('dir', 'ltr');
-        langToggle.classList.remove('ar');
-        langToggle.classList.add('en');
-      } else {
-        body.classList.remove('en-mode');
-        html.setAttribute('lang', 'ar');
-        html.setAttribute('dir', 'rtl');
-        langToggle.classList.remove('en');
-        langToggle.classList.add('ar');
-      }
+      setTimeout(() => {
+        if (lang === 'en') {
+          body.classList.add('en-mode');
+          html.setAttribute('lang', 'en');
+          html.setAttribute('dir', 'ltr');
+          langToggle.classList.remove('ar');
+          langToggle.classList.add('en');
+        } else {
+          body.classList.remove('en-mode');
+          html.setAttribute('lang', 'ar');
+          html.setAttribute('dir', 'rtl');
+          langToggle.classList.remove('en');
+          langToggle.classList.add('ar');
+        }
 
       // update active button state
-      langButtons.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
+        langButtons.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
 
       // fade back in
-      setTimeout(() => body.classList.remove('switching'), 50);
-    }, 300);
+        setTimeout(() => body.classList.remove('switching'), 50);
+      }, 300);
+    });
   });
-});
+})();

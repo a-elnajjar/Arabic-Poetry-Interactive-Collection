@@ -162,13 +162,19 @@ body {
 }
 
 /* ============ STANZA REVEAL ============ */
+/* Keep content visible by default, then enable reveal only when JS is ready. */
 .stanza {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.reveal-ready .stanza {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 
-.stanza.visible {
+body.reveal-ready .stanza.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -180,12 +186,17 @@ body {
   justify-content: center;
   gap: 1rem;
   margin: 4rem auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.reveal-ready .divider {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
-.divider.visible {
+body.reveal-ready .divider.visible {
   opacity: 1;
   transform: translateY(0);
 }

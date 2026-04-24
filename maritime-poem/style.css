@@ -10,17 +10,13 @@
   --paper: #f2ebdc;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
 html, body {
   background: var(--ink);
   color: var(--paper);
   font-family: 'Amiri', serif;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
-/* ocean depth background */
+/* ============ OCEAN BACKGROUND ============ */
 .sea {
   position: fixed;
   inset: 0;
@@ -31,7 +27,6 @@ html, body {
   z-index: -2;
 }
 
-/* grain overlay */
 .sea::after {
   content: '';
   position: absolute;
@@ -42,7 +37,7 @@ html, body {
   pointer-events: none;
 }
 
-/* falling light — "أمطار من ضوء مسموع" */
+/* ============ FALLING LIGHT ============ */
 .rain {
   position: fixed;
   inset: 0;
@@ -68,7 +63,7 @@ html, body {
   100% { transform: translateY(120vh); opacity: 0; }
 }
 
-/* distant birds */
+/* ============ BIRDS ============ */
 .bird {
   position: fixed;
   top: 18%;
@@ -79,8 +74,8 @@ html, body {
   color: var(--mist);
 }
 
-.bird:nth-child(2) { top: 24%; animation-duration: 80s; animation-delay: -20s; opacity: 0.2;}
-.bird:nth-child(3) { top: 14%; animation-duration: 95s; animation-delay: -45s; opacity: 0.28;}
+.bird:nth-child(2) { top: 24%; animation-duration: 80s; animation-delay: -20s; opacity: 0.2; }
+.bird:nth-child(3) { top: 14%; animation-duration: 95s; animation-delay: -45s; opacity: 0.28; }
 
 @keyframes drift {
   to { transform: translateX(110vw); }
@@ -108,17 +103,12 @@ html, body {
   animation: fadeIn 2s 0.2s ease forwards;
 }
 
-.ornament .line {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
+.glow.a { top: 20%; right: 5%; animation: breathe 8s ease-in-out infinite; }
+.glow.b { bottom: 10%; left: 10%; animation: breathe 12s ease-in-out infinite reverse; }
 
-.ornament .diamond {
-  width: 6px; height: 6px;
-  background: var(--gold);
-  transform: rotate(45deg);
-  box-shadow: 0 0 8px rgba(201, 168, 97, 0.6);
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
 }
 
 /* eyebrow */
@@ -133,7 +123,6 @@ html, body {
   animation: fadeIn 2s 0.8s ease forwards;
 }
 
-/* title */
 .title {
   font-family: 'Amiri', serif;
   font-weight: 700;
@@ -175,7 +164,6 @@ html, body {
   animation: fadeIn 2s 1.8s ease forwards;
 }
 
-/* scroll cue */
 .scroll-cue {
   position: absolute;
   bottom: 4vh;
@@ -185,17 +173,14 @@ html, body {
   font-size: 10.4px;
   letter-spacing: 6.4px;
   color: var(--mist);
-  opacity: 0;
-  animation: fadeIn 2s 2.5s ease forwards, pulse 2s 3s ease infinite;
   writing-mode: vertical-rl;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+@keyframes riseUp {
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* poem section */
+/* ============ POEM ============ */
 .poem {
   max-width: 780px;
   margin: 0 auto;
@@ -207,16 +192,14 @@ html, body {
 .stanza {
   margin-bottom: 112px;
   position: relative;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.5s ease;
 }
 
-.stanza.visible {
-  opacity: 1;
-  transform: translateY(0);
+.stanza.opening {
+  text-align: center;
+  margin-bottom: 4rem;
 }
 
+/* ============ STANZA NUMBER ============ */
 .stanza-num {
   font-family: 'Marcellus', serif;
   font-size: 11.2px;
@@ -236,6 +219,10 @@ html, body {
   opacity: 0.6;
 }
 
+.stanza.final .stanza-num { color: var(--turquoise); }
+.stanza.final .stanza-num::before { background: var(--turquoise); }
+
+/* ============ VERSE ============ */
 .verse {
   font-family: 'Amiri', serif;
   font-size: clamp(22.4px, 2.6vw, 31.2px);
@@ -256,6 +243,8 @@ html, body {
   color: var(--turquoise);
   padding-right: 22.4px;
 }
+
+.verse .line:hover::before { transform: translateY(-50%) scale(1); }
 
 .verse .refrain {
   color: var(--gold);
@@ -440,7 +429,6 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--turquoise);
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
@@ -449,13 +437,10 @@ body {
 }
 
 @keyframes trailFade {
-  to {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(3);
-  }
+  to { opacity: 0; transform: translate(-50%, -50%) scale(3); }
 }
 
-/* click ripple — concentric circles like a stone in water */
+/* ============ CLICK RIPPLE ============ */
 .ripple {
   position: fixed;
   border: 1px solid var(--turquoise);
@@ -467,28 +452,11 @@ body {
 }
 
 @keyframes rippleOut {
-  0% {
-    width: 0; height: 0;
-    opacity: 0.8;
-    border-width: 2px;
-  }
-  100% {
-    width: 250px; height: 250px;
-    opacity: 0;
-    border-width: 0.5px;
-  }
+  0% { width: 0; height: 0; opacity: 0.8; border-width: 2px; }
+  100% { width: 250px; height: 250px; opacity: 0; border-width: 0.5px; }
 }
 
-/* constellation canvas */
-#constellation {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.6;
-}
-
-/* sound toggle */
+/* ============ SOUND TOGGLE ============ */
 .sound-toggle {
   position: fixed;
   top: 32px;
@@ -511,19 +479,9 @@ body {
   animation: fadeIn 2s 3s ease forwards;
 }
 
-.sound-toggle:hover {
-  background: rgba(201, 168, 97, 0.15);
-  transform: scale(1.1);
-}
-
-.sound-toggle svg {
-  width: 20px;
-  height: 20px;
-}
-
-.sound-toggle .wave-anim {
-  display: none;
-}
+.sound-toggle:hover { background: rgba(201, 168, 97, 0.15); transform: scale(1.1); }
+.sound-toggle svg { width: 20px; height: 20px; }
+.sound-toggle .wave-anim { display: none; }
 
 .sound-toggle.playing .wave-anim {
   display: inline;
@@ -531,13 +489,8 @@ body {
   transform-origin: center;
 }
 
-.sound-toggle.playing .wave-anim.w2 {
-  animation-delay: 0.2s;
-}
-
-.sound-toggle.playing .wave-anim.w3 {
-  animation-delay: 0.4s;
-}
+.sound-toggle.playing .wave-anim.w2 { animation-delay: 0.2s; }
+.sound-toggle.playing .wave-anim.w3 { animation-delay: 0.4s; }
 
 @keyframes soundWave {
   0%, 100% { opacity: 0.3; }
@@ -593,15 +546,6 @@ body {
   right: 32px;
   z-index: 100;
   background: rgba(10, 22, 40, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 168, 97, 0.3);
-  border-radius: 40px;
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  cursor: none;
   opacity: 0;
   animation: fadeIn 2s 3s ease forwards;
   font-family: 'Marcellus', serif;
@@ -629,29 +573,27 @@ body {
 }
 
 .lang-toggle .slider {
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
   background: linear-gradient(135deg, var(--gold), #b8934d);
-  border-radius: 30px;
-  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   box-shadow: 0 2px 12px rgba(201, 168, 97, 0.3);
-  z-index: 1;
 }
 
-.lang-toggle.ar .slider {
-  right: 6px;
-  left: 50%;
+.lang-toggle button { color: var(--mist); }
+.lang-toggle button.ar { font-family: 'Amiri', serif; font-size: 0.95rem; letter-spacing: 0; }
+.lang-toggle button.active { color: var(--ink); }
+
+/* ============ FOOTER ============ */
+.footer {
+  padding: 6vh 2rem 10vh;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.lang-toggle.en .slider {
-  right: 50%;
-  left: 6px;
-}
-
-.lang-toggle button.active {
-  color: var(--ink);
-  font-weight: 600;
+.footer .signature {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--paper);
+  margin-bottom: 0.8rem;
 }
 
 /* Adjust sound toggle position so it doesn't collide */
@@ -660,13 +602,10 @@ body {
   left: 32px;
 }
 
-/* ============ BILINGUAL CONTENT ============ */
-/* English body uses a different font family */
-body.en-mode {
-  font-family: 'Cormorant Garamond', serif;
-}
+/* ============ BILINGUAL OVERRIDES ============ */
+body.lang-en { font-family: 'Cormorant Garamond', serif; }
 
-body.en-mode .verse {
+body.lang-en .verse {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
   text-align: left;
@@ -684,49 +623,8 @@ body.en-mode .verse .line:hover {
   transform: translateX(8px);
 }
 
-body.en-mode .verse .line::before {
-  right: auto;
-  left: 0;
-}
-
-body.en-mode .stanza-num::before {
-  /* flip the leading line */
-}
-
-body.en-mode .byline,
-body.en-mode .title,
-body.en-mode .verse .refrain.big,
-body.en-mode .signature {
-  font-family: 'Cormorant Garamond', serif;
-}
-
-body.en-mode .eyebrow,
-body.en-mode .ornament,
-body.en-mode .footer .meta {
-  /* keep as is */
-}
-
-/* content visibility */
-.ar-content { display: block; }
-.en-content { display: none; }
-
-body.en-mode {
-  direction: ltr;
-}
-body.en-mode .ar-content { display: none; }
-body.en-mode .en-content { display: block; }
-
-body.en-mode .stanza-num {
-  font-family: 'Marcellus', serif;
-}
-
-/* Smooth fade when switching */
-.poem, .stage, .footer {
-  transition: opacity 0.3s ease;
-}
-
-body.switching .poem,
-body.switching .stage,
-body.switching .footer {
-  opacity: 0;
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+  .verse { font-size: 1.35rem; line-height: 2; }
+  .stanza { margin-bottom: 5rem; }
 }

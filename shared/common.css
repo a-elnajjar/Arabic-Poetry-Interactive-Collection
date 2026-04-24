@@ -1,0 +1,258 @@
+/* ============ RESET ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  cursor: none;
+  position: relative;
+}
+
+/* ============ CUSTOM CURSOR ============ */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease;
+  mix-blend-mode: screen;
+}
+
+.cursor svg {
+  width: 100%;
+  height: 100%;
+  animation: cursorSpin 8s linear infinite;
+}
+
+.cursor.hover {
+  transform: translate(-50%, -50%) scale(1.8);
+}
+
+.cursor.hover svg {
+  animation-duration: 3s;
+}
+
+@keyframes cursorSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+}
+
+/* ============ CONSTELLATION CANVAS ============ */
+#constellation {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============ LANGUAGE TOGGLE ============ */
+.lang-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(201, 168, 97, 0.3);
+  border-radius: 40px;
+  padding: 4px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  direction: ltr;
+}
+
+.lang-toggle .slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 44px;
+  height: 36px;
+  border-radius: 30px;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lang-toggle.en .slider { transform: translateX(0); }
+.lang-toggle.ar .slider { transform: translateX(44px); }
+
+.lang-toggle button {
+  width: 44px;
+  height: 36px;
+  background: none;
+  border: none;
+  font-family: 'Marcellus', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  border-radius: 30px;
+  cursor: none;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.lang-toggle button.active {
+  font-weight: 600;
+}
+
+/* ============ STAGE (HERO) ============ */
+.stage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8vh 6vw;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============ ORNAMENT ============ */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  opacity: 0;
+  animation: fadeIn 2s 0.2s ease forwards;
+}
+
+.ornament .line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 97, 0.8), transparent);
+}
+
+.ornament .diamond {
+  width: 6px;
+  height: 6px;
+  background: rgba(201, 168, 97, 0.9);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(201, 168, 97, 0.6);
+}
+
+/* ============ EYEBROW ============ */
+.eyebrow {
+  font-family: 'Marcellus', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 2s 0.8s ease forwards;
+}
+
+/* ============ SCROLL CUE ============ */
+.scroll-cue {
+  position: absolute;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Marcellus', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  opacity: 0;
+  animation: fadeIn 2s 2.5s ease forwards, pulse 2s 3s ease infinite;
+}
+
+/* ============ STANZA REVEAL ============ */
+.stanza {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.stanza.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ DIVIDERS ============ */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 4rem auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.divider.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.divider .line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 97, 0.6), transparent);
+  display: block;
+}
+
+.divider .wave {
+  font-family: 'Marcellus', serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.3em;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  text-align: center;
+  border-top: 1px solid rgba(201, 168, 97, 0.15);
+  position: relative;
+  z-index: 2;
+}
+
+/* ============ LANGUAGE VISIBILITY ============ */
+body.lang-ar .en-content { display: none; }
+body.lang-en .ar-content { display: none; }
+body.lang-en { direction: ltr; }
+
+/* ============ LANGUAGE SWITCH FADE ============ */
+.poem, .stage, .footer {
+  transition: opacity 0.3s ease;
+}
+
+body.switching .poem,
+body.switching .stage,
+body.switching .footer {
+  opacity: 0;
+}
+
+/* ============ KEYFRAMES ============ */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* ============ SELECTION ============ */
+::selection {
+  background: rgba(201, 168, 97, 0.4);
+}

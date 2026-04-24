@@ -18,7 +18,7 @@ maritime-poem/
 └── script.js    — IIFE-wrapped JS (rain, cursor, constellation, sound, language toggle)
 ```
 
-🌊 **[View live page](https://a-elnajjar.github.io/maritime-poem/maritime-poem/index.html)**
+🌊 **[View live page](https://a-elnajjar.github.io/Arabic-Poetry-Interactive-Collection/maritime-poem/index.html)**
 
 ---
 
@@ -34,7 +34,7 @@ ThinkofOthers/
 └── script.js    — IIFE-wrapped JS (cursor, constellation, stanza reveal, language toggle)
 ```
 
-🕊️ **[View live page](https://a-elnajjar.github.io/maritime-poem/ThinkofOthers/index.html)**
+🕊️ **[View live page](https://a-elnajjar.github.io/Arabic-Poetry-Interactive-Collection/ThinkofOthers/index.html)**
 
 ---
 

@@ -81,16 +81,26 @@ html, body {
   to { transform: translateX(110vw); }
 }
 
-/* ============ GLOW SPOTS ============ */
-.glow {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(95, 184, 184, 0.08) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: -1;
-  filter: blur(40px);
+/* layout */
+.stage {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3vh 6vw;
+  position: relative;
+  z-index: 2;
+}
+
+/* top ornament */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 19.2px;
+  color: var(--gold);
+  opacity: 0;
+  animation: fadeIn 2s 0.2s ease forwards;
 }
 
 .glow.a { top: 20%; right: 5%; animation: breathe 8s ease-in-out infinite; }
@@ -101,17 +111,26 @@ html, body {
   50% { transform: scale(1.2); opacity: 1; }
 }
 
-/* ============ HERO ============ */
-.eyebrow { color: var(--gold); }
+/* eyebrow */
+.eyebrow {
+  font-family: 'Marcellus', serif;
+  font-size: 11.5px;
+  letter-spacing: 8px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 24px;
+  opacity: 0;
+  animation: fadeIn 2s 0.8s ease forwards;
+}
 
 .title {
   font-family: 'Amiri', serif;
   font-weight: 700;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(44.8px, 7vw, 88px);
   line-height: 1;
   color: var(--paper);
-  margin-top: 1.2rem;
-  margin-bottom: 0.6rem;
+  margin-top: 19.2px;
+  margin-bottom: 9.6px;
   text-align: center;
   opacity: 0;
   animation: riseUp 2s 1.2s ease forwards;
@@ -138,14 +157,21 @@ html, body {
 .byline {
   font-family: 'Amiri', serif;
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 17.6px;
   color: var(--mist);
-  margin-top: 2.5rem;
+  margin-top: 40px;
   opacity: 0;
   animation: fadeIn 2s 1.8s ease forwards;
 }
 
 .scroll-cue {
+  position: absolute;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Marcellus', serif;
+  font-size: 10.4px;
+  letter-spacing: 6.4px;
   color: var(--mist);
   writing-mode: vertical-rl;
 }
@@ -164,7 +190,7 @@ html, body {
 }
 
 .stanza {
-  margin-bottom: 7rem;
+  margin-bottom: 112px;
   position: relative;
 }
 
@@ -176,13 +202,13 @@ html, body {
 /* ============ STANZA NUMBER ============ */
 .stanza-num {
   font-family: 'Marcellus', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
+  font-size: 11.2px;
+  letter-spacing: 6.4px;
   color: var(--gold);
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .stanza-num::before {
@@ -199,41 +225,23 @@ html, body {
 /* ============ VERSE ============ */
 .verse {
   font-family: 'Amiri', serif;
-  font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+  font-size: clamp(22.4px, 2.6vw, 31.2px);
   line-height: 2.2;
   color: var(--paper);
   text-align: right;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.2px;
 }
 
 .verse .line {
   display: block;
   position: relative;
-  padding-right: 1rem;
-  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  cursor: none;
+  padding-right: 16px;
+  transition: all 0.4s ease;
 }
 
 .verse .line:hover {
   color: var(--turquoise);
-  padding-right: 1.8rem;
-  text-shadow: 0 0 20px rgba(95, 184, 184, 0.5);
-  transform: translateX(-8px);
-  letter-spacing: 0.02em;
-}
-
-.verse .line::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--turquoise);
-  transform: translateY(-50%) scale(0);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 0 12px var(--turquoise);
+  padding-right: 22.4px;
 }
 
 .verse .line:hover::before { transform: translateY(-50%) scale(1); }
@@ -245,28 +253,96 @@ html, body {
 }
 
 .verse .refrain.big {
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-size: clamp(28.8px, 3.5vw, 41.6px);
   text-align: center;
   display: block;
-  padding: 2rem 0;
-  letter-spacing: 0.03em;
+  padding: 32px 0;
+  letter-spacing: 0.5px;
   text-shadow: 0 0 30px rgba(201, 168, 97, 0.3);
 }
 
-.verse .refrain.big:hover { padding-right: 0; transform: none; }
-
-.verse .accent { color: var(--turquoise); }
+.stanza.opening {
+  text-align: center;
+  margin-bottom: 64px;
+}
 
 .stanza.final .verse {
   border-right: 2px solid var(--gold);
-  padding-right: 1.5rem;
-  margin-right: -0.5rem;
+  padding-right: 24px;
+  margin-right: -8px;
 }
 
-/* ============ DIVIDER COLOURS ============ */
-.divider { color: var(--gold); }
+.stanza.final .stanza-num {
+  color: var(--turquoise);
+}
 
-/* ============ SHIP SILHOUETTE ============ */
+.stanza.final .stanza-num::before {
+  background: var(--turquoise);
+}
+
+.verse .accent {
+  color: var(--turquoise);
+}
+
+/* decorative separator */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 64px auto;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+.divider .wave {
+  font-size: 19.2px;
+  letter-spacing: 4.8px;
+}
+
+.divider .line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* footer */
+.footer {
+  text-align: center;
+  padding: 6vh 32px 10vh;
+  border-top: 1px solid rgba(201, 168, 97, 0.15);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.footer .signature {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: 25.6px;
+  color: var(--paper);
+  margin-bottom: 12.8px;
+}
+
+.footer .meta {
+  font-family: 'Marcellus', serif;
+  font-size: 11.2px;
+  letter-spacing: 6.4px;
+  color: var(--mist);
+  text-transform: uppercase;
+}
+
+/* animations */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes riseUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* decorative ship silhouette */
 .ship {
   position: absolute;
   bottom: 20%;
@@ -281,7 +357,73 @@ html, body {
   to { transform: translateX(110vw); }
 }
 
-/* ============ CURSOR TRAIL ============ */
+/* turquoise glow spots — "مراكب حبلى بالفيروز" */
+.glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(95, 184, 184, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(40px);
+}
+
+.glow.a { top: 20%; right: 5%; animation: breathe 8s ease-in-out infinite; }
+.glow.b { bottom: 10%; left: 10%; animation: breathe 12s ease-in-out infinite reverse; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .verse { font-size: 21.6px; line-height: 2; }
+  .stanza { margin-bottom: 80px; }
+}
+
+/* ============ INTERACTIVITY ============ */
+
+/* custom cursor — a small compass/star */
+body {
+  cursor: none;
+}
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  .cursor, .cursor-trail { display: none !important; }
+}
+
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+.cursor svg {
+  width: 100%;
+  height: 100%;
+  animation: cursorSpin 8s linear infinite;
+}
+
+.cursor.hover {
+  width: 50px;
+  height: 50px;
+}
+
+.cursor.hover svg {
+  animation-duration: 3s;
+}
+
+@keyframes cursorSpin {
+  to { transform: rotate(360deg); }
+}
+
 .cursor-trail {
   position: fixed;
   width: 4px;
@@ -317,8 +459,8 @@ html, body {
 /* ============ SOUND TOGGLE ============ */
 .sound-toggle {
   position: fixed;
-  top: 2rem;
-  left: 2rem;
+  top: 32px;
+  left: 32px;
   z-index: 100;
   background: rgba(10, 22, 40, 0.6);
   backdrop-filter: blur(12px);
@@ -355,11 +497,79 @@ html, body {
   50% { opacity: 1; }
 }
 
-/* ============ LANG TOGGLE — COLOUR OVERRIDES ============ */
+/* line hover — gentle tilt + glow */
+.verse .line {
+  display: block;
+  position: relative;
+  padding-right: 16px;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: none;
+}
+
+.verse .line:hover {
+  color: var(--turquoise);
+  padding-right: 28.8px;
+  text-shadow: 0 0 20px rgba(95, 184, 184, 0.5);
+  transform: translateX(-8px);
+  letter-spacing: 0.3px;
+}
+
+/* line reveal marker — a small drop that appears on hover */
+.verse .line::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--turquoise);
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 0 12px var(--turquoise);
+}
+
+.verse .line:hover::before {
+  transform: translateY(-50%) scale(1);
+}
+
+/* remove padding override from refrain.big */
+.verse .refrain.big:hover {
+  padding-right: 0;
+  transform: none;
+}
+
+/* ============ LANGUAGE TOGGLE ============ */
 .lang-toggle {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 100;
   background: rgba(10, 22, 40, 0.6);
   opacity: 0;
   animation: fadeIn 2s 3s ease forwards;
+  font-family: 'Marcellus', serif;
+}
+
+.lang-toggle button {
+  background: none;
+  border: none;
+  color: var(--mist);
+  font-family: 'Marcellus', serif;
+  font-size: 12px;
+  letter-spacing: 2.4px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: none;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.lang-toggle button.ar {
+  font-family: 'Amiri', serif;
+  font-size: 15.2px;
+  letter-spacing: 0;
 }
 
 .lang-toggle .slider {
@@ -386,12 +596,10 @@ html, body {
   margin-bottom: 0.8rem;
 }
 
-.footer .meta {
-  font-family: 'Marcellus', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
-  color: var(--mist);
-  text-transform: uppercase;
+/* Adjust sound toggle position so it doesn't collide */
+.sound-toggle {
+  top: 32px;
+  left: 32px;
 }
 
 /* ============ BILINGUAL OVERRIDES ============ */
@@ -404,14 +612,16 @@ body.lang-en .verse {
   direction: ltr;
 }
 
-body.lang-en .verse .line { padding-right: 0; padding-left: 1rem; }
-body.lang-en .verse .line:hover { padding-right: 0; padding-left: 1.8rem; transform: translateX(8px); }
-body.lang-en .verse .line::before { right: auto; left: 0; }
+body.en-mode .verse .line {
+  padding-right: 0;
+  padding-left: 16px;
+}
 
-body.lang-en .byline,
-body.lang-en .title,
-body.lang-en .verse .refrain.big,
-body.lang-en .footer .signature { font-family: 'Cormorant Garamond', serif; }
+body.en-mode .verse .line:hover {
+  padding-right: 0;
+  padding-left: 28.8px;
+  transform: translateX(8px);
+}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 600px) {

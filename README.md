@@ -52,5 +52,4 @@ README.md
 - Custom animated compass cursor with trail effect
 - Scroll-triggered stanza reveals (IntersectionObserver)
 - Constellation canvas that reacts to mouse movement
-- All CSS and JavaScript extracted into separate files
 - JavaScript wrapped in an IIFE for clean scoping

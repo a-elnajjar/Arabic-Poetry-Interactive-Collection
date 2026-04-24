@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   cursor: none;
   position: relative;
+  touch-action: manipulation;
 }
 
 /* ============ CUSTOM CURSOR ============ */

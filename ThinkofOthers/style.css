@@ -32,7 +32,7 @@ body {
 
 /* Reem Kufi fine-tuning for Arabic poetry */
 [lang="ar"], .ar-content {
-  letter-spacing: 0.01em;
+  letter-spacing: 0.2px;
 }
 
 /* ============ ATMOSPHERIC LAYERS ============ */
@@ -149,8 +149,8 @@ body {
 /* ============ TOGGLES ============ */
 .lang-toggle {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 32px;
+  right: 32px;
   z-index: 100;
   display: flex;
   background: rgba(242, 235, 220, 0.06);
@@ -182,7 +182,7 @@ body {
   background: transparent;
   color: var(--paper-soft);
   font-family: 'Marcellus', serif;
-  font-size: 0.9rem;
+  font-size: 14.4px;
   cursor: none;
   z-index: 2;
   transition: color 0.3s ease;
@@ -337,15 +337,15 @@ body {
   text-align: center;
   position: relative;
   z-index: 10;
-  padding: 2rem 2rem;
+  padding: 32px 32px;
 }
 
 .ornament {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 24px;
+  margin-bottom: 24px;
   opacity: 0;
   animation: fadeDown 1.5s ease-out 0.3s forwards;
 }
@@ -366,23 +366,23 @@ body {
 
 .eyebrow {
   font-family: 'Marcellus', serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.4em;
+  font-size: 13.6px;
+  letter-spacing: 6.4px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 1.2rem;
+  margin-bottom: 19.2px;
   opacity: 0;
   animation: fadeUp 1.5s ease-out 0.5s forwards;
 }
 
-.ar-content .eyebrow { font-family: 'Reem Kufi', sans-serif; letter-spacing: 0.2em; }
+.ar-content .eyebrow { font-family: 'Reem Kufi', sans-serif; letter-spacing: 3.2px; }
 
 .title {
-  font-size: clamp(4rem, 11vw, 8rem);
+  font-size: clamp(64px, 11vw, 128px);
   line-height: 1;
   font-weight: 700;
   color: var(--paper);
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
   position: relative;
   opacity: 0;
   animation: fadeUp 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
@@ -402,7 +402,7 @@ body {
 .title .word.en-content {
   font-family: 'Marcellus', serif;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.2px;
   background: linear-gradient(135deg, var(--paper) 20%, var(--gold) 60%, var(--paper) 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -419,9 +419,9 @@ body {
 .byline {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
-  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  font-size: clamp(20.8px, 2.2vw, 28.8px);
   color: var(--paper-soft);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.8px;
   max-width: 700px;
   opacity: 0;
   animation: fadeUp 1.5s ease-out 1.2s forwards;
@@ -431,18 +431,18 @@ body {
 
 .scroll-cue {
   position: absolute;
-  bottom: 3rem;
+  bottom: 48px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Marcellus', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.4em;
+  font-size: 12px;
+  letter-spacing: 6.4px;
   color: var(--gold);
   opacity: 0;
   animation: fadeUp 1.5s ease-out 2s forwards, bounce 2s ease-in-out 3s infinite;
 }
 
-.ar-content.scroll-cue { font-family: 'Reem Kufi', sans-serif; letter-spacing: 0.2em; }
+.ar-content.scroll-cue { font-family: 'Reem Kufi', sans-serif; letter-spacing: 3.2px; }
 
 .scroll-cue::after {
   content: '';
@@ -450,21 +450,21 @@ body {
   width: 1px;
   height: 40px;
   background: linear-gradient(to bottom, var(--gold), transparent);
-  margin: 0.75rem auto 0;
+  margin: 12px auto 0;
 }
 
 /* ============ POEM ============ */
 .poem {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 2rem 4rem;
+  padding: 32px 32px 64px;
   position: relative;
   z-index: 10;
 }
 
 .stanza {
-  margin: 3rem 0;
-  padding: 2rem 2.5rem;
+  margin: 48px 0;
+  padding: 32px 40px;
   background: rgba(10, 21, 40, 0.45);
   border: 1px solid rgba(255, 217, 122, 0.25);
   border-radius: 4px;
@@ -496,7 +496,7 @@ body {
   background: transparent;
   border: none;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 48px 32px;
 }
 
 .stanza.opening::before { display: none; }
@@ -504,14 +504,14 @@ body {
 .stanza-num {
   position: absolute;
   top: -20px;
-  right: 2rem;
-  padding: 0.4rem 1rem;
+  right: 32px;
+  padding: 6.4px 16px;
   background: var(--bg-deep);
   border: 1px solid var(--gold);
   color: var(--gold);
   font-family: 'Marcellus', serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
+  font-size: 13.6px;
+  letter-spacing: 3.2px;
   z-index: 5;
   box-shadow: 0 0 20px rgba(255, 217, 122, 0.3);
 }
@@ -530,21 +530,21 @@ body {
 .line {
   display: block;
   font-family: 'Reem Kufi', sans-serif;
-  font-size: clamp(1.35rem, 1.9vw, 1.7rem);
+  font-size: clamp(21.6px, 1.9vw, 27.2px);
   line-height: 2.1;
   color: var(--paper);
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   font-weight: 500;
 }
 
 .en-content .line {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.2px;
 }
 
 .line.big {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 700;
   color: var(--gold-soft);
   line-height: 1.4;
@@ -559,23 +559,23 @@ body {
 .line.accent {
   color: var(--gold-soft);
   font-style: italic;
-  padding-right: 1.5rem;
+  padding-right: 24px;
   position: relative;
-  margin: 0.5rem 0;
+  margin: 8px 0;
 }
 
 .en-content .line.accent {
   padding-right: 0;
-  padding-left: 1.5rem;
+  padding-left: 24px;
 }
 
 .line.accent::before {
   content: '';
   position: absolute;
   right: 0;
-  top: 0.6em;
+  top: 9.6px;
   width: 3px;
-  height: 1em;
+  height: 16px;
   background: var(--gold);
   opacity: 0.7;
 }
@@ -590,8 +590,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
+  gap: 24px;
+  margin: 24px 0;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease-out, transform 1s ease-out;
@@ -614,8 +614,8 @@ body {
 .divider .wave {
   font-family: 'Marcellus', serif;
   color: var(--gold);
-  font-size: 1.2rem;
-  letter-spacing: 0.3em;
+  font-size: 19.2px;
+  letter-spacing: 4.8px;
   opacity: 0.8;
 }
 
@@ -623,7 +623,7 @@ body {
 .stanza.final {
   background: linear-gradient(135deg, rgba(255, 217, 122, 0.15), rgba(255, 179, 217, 0.1));
   border: 1px solid rgba(255, 217, 122, 0.5);
-  padding: 4rem 3rem;
+  padding: 64px 48px;
   position: relative;
   box-shadow: 0 0 60px rgba(255, 217, 122, 0.2);
 }
@@ -654,18 +654,18 @@ body {
 /* ============ FOOTER ============ */
 .footer {
   text-align: center;
-  padding: 2rem 2rem;
+  padding: 32px 32px;
   border-top: 1px solid rgba(201, 168, 97, 0.15);
-  margin-top: 2rem;
+  margin-top: 32px;
   position: relative;
   z-index: 10;
 }
 
 .signature {
   font-family: 'Reem Kufi', sans-serif;
-  font-size: 1.5rem;
+  font-size: 24px;
   color: var(--gold);
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .en-content.signature {
@@ -674,15 +674,15 @@ body {
 
 .meta {
   font-family: 'Marcellus', serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
+  font-size: 12.8px;
+  letter-spacing: 4.8px;
   text-transform: uppercase;
   color: var(--muted);
 }
 
 .ar-content.meta {
   font-family: 'Reem Kufi', sans-serif;
-  letter-spacing: 0.15em;
+  letter-spacing: 2.4px;
 }
 
 /* ============ LANGUAGE VISIBILITY ============ */
@@ -716,8 +716,8 @@ body.lang-en .verse { direction: ltr; text-align: left; }
 @media (max-width: 768px) {
   body { cursor: auto; }
   .cursor { display: none; }
-  .stanza { padding: 2rem 1.5rem; margin: 2rem 0; }
-  .stanza.final { padding: 2.5rem 1.5rem; }
-  .lang-toggle { right: 1rem; top: 1rem; }
-  .poem { padding: 2rem 1rem 4rem; }
+  .stanza { padding: 32px 24px; margin: 32px 0; }
+  .stanza.final { padding: 40px 24px; }
+  .lang-toggle { right: 16px; top: 16px; }
+  .poem { padding: 32px 16px 64px; }
 }

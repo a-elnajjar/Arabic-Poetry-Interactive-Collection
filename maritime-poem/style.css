@@ -102,7 +102,7 @@ html, body {
 .ornament {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 19.2px;
   color: var(--gold);
   opacity: 0;
   animation: fadeIn 2s 0.2s ease forwards;
@@ -124,11 +124,11 @@ html, body {
 /* eyebrow */
 .eyebrow {
   font-family: 'Marcellus', serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.5em;
+  font-size: 11.5px;
+  letter-spacing: 8px;
   color: var(--gold);
   text-transform: uppercase;
-  margin-top: 1.5rem;
+  margin-top: 24px;
   opacity: 0;
   animation: fadeIn 2s 0.8s ease forwards;
 }
@@ -137,11 +137,11 @@ html, body {
 .title {
   font-family: 'Amiri', serif;
   font-weight: 700;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(44.8px, 7vw, 88px);
   line-height: 1;
   color: var(--paper);
-  margin-top: 1.2rem;
-  margin-bottom: 0.6rem;
+  margin-top: 19.2px;
+  margin-bottom: 9.6px;
   text-align: center;
   opacity: 0;
   animation: riseUp 2s 1.2s ease forwards;
@@ -168,9 +168,9 @@ html, body {
 .byline {
   font-family: 'Amiri', serif;
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 17.6px;
   color: var(--mist);
-  margin-top: 2.5rem;
+  margin-top: 40px;
   opacity: 0;
   animation: fadeIn 2s 1.8s ease forwards;
 }
@@ -182,8 +182,8 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Marcellus', serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.4em;
+  font-size: 10.4px;
+  letter-spacing: 6.4px;
   color: var(--mist);
   opacity: 0;
   animation: fadeIn 2s 2.5s ease forwards, pulse 2s 3s ease infinite;
@@ -205,7 +205,7 @@ html, body {
 }
 
 .stanza {
-  margin-bottom: 7rem;
+  margin-bottom: 112px;
   position: relative;
   opacity: 0;
   transform: translateY(30px);
@@ -219,13 +219,13 @@ html, body {
 
 .stanza-num {
   font-family: 'Marcellus', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
+  font-size: 11.2px;
+  letter-spacing: 6.4px;
   color: var(--gold);
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .stanza-num::before {
@@ -238,23 +238,23 @@ html, body {
 
 .verse {
   font-family: 'Amiri', serif;
-  font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+  font-size: clamp(22.4px, 2.6vw, 31.2px);
   line-height: 2.2;
   color: var(--paper);
   text-align: right;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.2px;
 }
 
 .verse .line {
   display: block;
   position: relative;
-  padding-right: 1rem;
+  padding-right: 16px;
   transition: all 0.4s ease;
 }
 
 .verse .line:hover {
   color: var(--turquoise);
-  padding-right: 1.4rem;
+  padding-right: 22.4px;
 }
 
 .verse .refrain {
@@ -264,23 +264,23 @@ html, body {
 }
 
 .verse .refrain.big {
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-size: clamp(28.8px, 3.5vw, 41.6px);
   text-align: center;
   display: block;
-  padding: 2rem 0;
-  letter-spacing: 0.03em;
+  padding: 32px 0;
+  letter-spacing: 0.5px;
   text-shadow: 0 0 30px rgba(201, 168, 97, 0.3);
 }
 
 .stanza.opening {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 64px;
 }
 
 .stanza.final .verse {
   border-right: 2px solid var(--gold);
-  padding-right: 1.5rem;
-  margin-right: -0.5rem;
+  padding-right: 24px;
+  margin-right: -8px;
 }
 
 .stanza.final .stanza-num {
@@ -300,15 +300,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin: 4rem auto;
+  gap: 16px;
+  margin: 64px auto;
   color: var(--gold);
   opacity: 0.6;
 }
 
 .divider .wave {
-  font-size: 1.2rem;
-  letter-spacing: 0.3em;
+  font-size: 19.2px;
+  letter-spacing: 4.8px;
 }
 
 .divider .line {
@@ -320,7 +320,7 @@ html, body {
 /* footer */
 .footer {
   text-align: center;
-  padding: 6vh 2rem 10vh;
+  padding: 6vh 32px 10vh;
   border-top: 1px solid rgba(201, 168, 97, 0.15);
   max-width: 600px;
   margin: 0 auto;
@@ -331,15 +331,15 @@ html, body {
 .footer .signature {
   font-family: 'Amiri', serif;
   font-style: italic;
-  font-size: 1.6rem;
+  font-size: 25.6px;
   color: var(--paper);
-  margin-bottom: 0.8rem;
+  margin-bottom: 12.8px;
 }
 
 .footer .meta {
   font-family: 'Marcellus', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
+  font-size: 11.2px;
+  letter-spacing: 6.4px;
   color: var(--mist);
   text-transform: uppercase;
 }
@@ -389,8 +389,8 @@ html, body {
 }
 
 @media (max-width: 600px) {
-  .verse { font-size: 1.35rem; line-height: 2; }
-  .stanza { margin-bottom: 5rem; }
+  .verse { font-size: 21.6px; line-height: 2; }
+  .stanza { margin-bottom: 80px; }
 }
 
 /* ============ INTERACTIVITY ============ */
@@ -491,8 +491,8 @@ body {
 /* sound toggle */
 .sound-toggle {
   position: fixed;
-  top: 2rem;
-  left: 2rem;
+  top: 32px;
+  left: 32px;
   z-index: 100;
   background: rgba(10, 22, 40, 0.6);
   backdrop-filter: blur(12px);
@@ -548,17 +548,17 @@ body {
 .verse .line {
   display: block;
   position: relative;
-  padding-right: 1rem;
+  padding-right: 16px;
   transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: none;
 }
 
 .verse .line:hover {
   color: var(--turquoise);
-  padding-right: 1.8rem;
+  padding-right: 28.8px;
   text-shadow: 0 0 20px rgba(95, 184, 184, 0.5);
   transform: translateX(-8px);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.3px;
 }
 
 /* line reveal marker — a small drop that appears on hover */
@@ -589,8 +589,8 @@ body {
 /* ============ LANGUAGE TOGGLE ============ */
 .lang-toggle {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 32px;
+  right: 32px;
   z-index: 100;
   background: rgba(10, 22, 40, 0.6);
   backdrop-filter: blur(12px);
@@ -612,8 +612,8 @@ body {
   border: none;
   color: var(--mist);
   font-family: 'Marcellus', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  font-size: 12px;
+  letter-spacing: 2.4px;
   padding: 8px 16px;
   border-radius: 30px;
   cursor: none;
@@ -624,7 +624,7 @@ body {
 
 .lang-toggle button.ar {
   font-family: 'Amiri', serif;
-  font-size: 0.95rem;
+  font-size: 15.2px;
   letter-spacing: 0;
 }
 
@@ -656,8 +656,8 @@ body {
 
 /* Adjust sound toggle position so it doesn't collide */
 .sound-toggle {
-  top: 2rem;
-  left: 2rem;
+  top: 32px;
+  left: 32px;
 }
 
 /* ============ BILINGUAL CONTENT ============ */
@@ -675,12 +675,12 @@ body.en-mode .verse {
 
 body.en-mode .verse .line {
   padding-right: 0;
-  padding-left: 1rem;
+  padding-left: 16px;
 }
 
 body.en-mode .verse .line:hover {
   padding-right: 0;
-  padding-left: 1.8rem;
+  padding-left: 28.8px;
   transform: translateX(8px);
 }
 

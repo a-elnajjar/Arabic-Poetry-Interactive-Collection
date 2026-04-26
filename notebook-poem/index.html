@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>سيدتي — نزار قباني</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@400;600&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/common.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-ar">
+
+<!-- paper + atmosphere layers -->
+<div class="paper-bg"></div>
+<div class="lines-overlay"></div>
+<div class="glow glow-gold"></div>
+<div class="glow glow-green"></div>
+<div class="glow glow-red"></div>
+
+<!-- constellation canvas -->
+<canvas id="constellation"></canvas>
+
+<!-- floating word particles -->
+<div class="words-float" id="wordsFloat"></div>
+
+<!-- custom cursor -->
+<div class="cursor" id="cursor">
+  <svg viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="11" stroke="#3d2520" stroke-width="0.6" opacity="0.35"/>
+    <circle cx="12" cy="12" r="6"  stroke="#c89810" stroke-width="0.5" opacity="0.55"/>
+    <path d="M12 2 L13 12 L12 22 L11 12 Z" fill="#3d2520" opacity="0.55"/>
+    <path d="M2 12 L12 11 L22 12 L12 13 Z" fill="#c89810" opacity="0.5"/>
+    <circle cx="12" cy="12" r="1.2" fill="#1c100a"/>
+  </svg>
+</div>
+
+<!-- language toggle -->
+<div class="lang-toggle ar" id="langToggle">
+  <div class="slider"></div>
+  <button class="en" data-lang="en">EN</button>
+  <button class="ar active" data-lang="ar">ع</button>
+</div>
+
+<!-- HERO -->
+<section class="stage">
+  <div class="ornament">
+    <div class="line"></div>
+    <div class="diamond"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="eyebrow ar-content">نزار قباني · 1923—1998</div>
+  <div class="eyebrow en-content">Nizar Qabbani · 1923—1998</div>
+
+  <h1 class="title">
+    <span class="ar-content">سيدتي</span>
+    <span class="en-content">My Lady</span>
+  </h1>
+
+  <p class="byline ar-content">من دفتر الشاعر الجوّال</p>
+  <p class="byline en-content">From the Wandering Poet's Notebook</p>
+
+  <div class="scroll-cue ar-content">اقرأ</div>
+  <div class="scroll-cue en-content">READ</div>
+</section>
+
+<!-- POEM -->
+<section class="poem">
+
+  <!-- Opening -->
+  <div class="stanza opening" data-stanza>
+    <div class="verse ar-content">
+      <span class="line big">سيدتي!</span>
+      <span class="line">عندي في الدفتر</span>
+      <span class="line accent">ترقص آلاف الكلمات</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line big">My lady!</span>
+      <span class="line">In my notebook</span>
+      <span class="line accent">Thousands of words are dancing</span>
+    </div>
+  </div>
+
+  <div class="divider" data-stanza>
+    <div class="line"></div>
+    <div class="wave">✦</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA I — the coloured dresses -->
+  <div class="stanza" data-stanza>
+    <div class="stanza-num">I</div>
+    <div class="verse ar-content">
+      <span class="line yellow-line">واحدةٌ في ثوبٍ أصفر</span>
+      <span class="line red-line">واحدةٌ في ثوبٍ أحمر</span>
+      <span class="line">يحرق أطراف الصفحات</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line yellow-line">One in a yellow dress</span>
+      <span class="line red-line">One in a red dress</span>
+      <span class="line">That burns the edges of the pages</span>
+    </div>
+  </div>
+
+  <div class="divider" data-stanza>
+    <div class="line"></div>
+    <div class="wave">≈ ≈ ≈</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA II — family of verses -->
+  <div class="stanza" data-stanza>
+    <div class="stanza-num">II</div>
+    <div class="verse ar-content">
+      <span class="line">أنا لست وحيداً في الدنيا</span>
+      <span class="line accent">عائلتي .. حزمة أبيات</span>
+      <span class="line">أنا شاعر حبٍ جوالٌ</span>
+      <span class="line">تعرفه كل الشرفات</span>
+      <span class="line">تعرفه كل الحلوات</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">I am not alone in this world</span>
+      <span class="line accent">My family... a bundle of verses</span>
+      <span class="line">I am a wandering poet of love</span>
+      <span class="line">Known to every balcony</span>
+      <span class="line">Known to every sweet one</span>
+    </div>
+  </div>
+
+  <div class="divider" data-stanza>
+    <div class="line"></div>
+    <div class="wave">≈ ≈ ≈</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA III — the pen's limits -->
+  <div class="stanza" data-stanza>
+    <div class="stanza-num">III</div>
+    <div class="verse ar-content">
+      <span class="line">عندي للحب تعابيرٌ</span>
+      <span class="line accent">ما مرت في بال دواة</span>
+      <span class="line">الشمس فتحت نوافذها</span>
+      <span class="line">و تركت هنالك مرساتي</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">I have expressions for love</span>
+      <span class="line accent">That have never crossed a pen's mind</span>
+      <span class="line">The sun opened its windows</span>
+      <span class="line">And left my anchor there</span>
+    </div>
+  </div>
+
+  <div class="divider" data-stanza>
+    <div class="line"></div>
+    <div class="wave">≈ ≈ ≈</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA IV — the green moon -->
+  <div class="stanza moon-stanza" data-stanza>
+    <div class="stanza-num">IV</div>
+    <div class="verse ar-content">
+      <span class="line">و قطعت بحاراً .. و بحاراً</span>
+      <span class="line">أنبش أعماق الموجات</span>
+      <span class="line">أبحث في جوف الصدفات</span>
+      <span class="line green-line">عن حرفٍ كالقمر الأخضر</span>
+      <span class="line refrain">أهديه لعيني مولاتي</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">I crossed oceans... and oceans</span>
+      <span class="line">Digging through the depths of waves</span>
+      <span class="line">Searching in the hearts of shells</span>
+      <span class="line green-line">For a letter like the green moon</span>
+      <span class="line refrain">To offer to my lady's eyes</span>
+    </div>
+  </div>
+
+  <div class="divider big-divider" data-stanza>
+    <div class="line"></div>
+    <div class="wave big-wave">✦ ✦ ✦</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- FINAL STANZA — closing refrain -->
+  <div class="stanza final" data-stanza>
+    <div class="stanza-num ar-content">V · الخاتمة</div>
+    <div class="stanza-num en-content">V · Envoi</div>
+
+    <div class="verse ar-content">
+      <span class="line big">سيدتي!</span>
+      <span class="line">في هذا الدفتر</span>
+      <span class="line">تجدين ألوف الكلمات</span>
+      <span class="line color-parade">
+        <span class="white-word">الأبيض منها</span>
+        <span class="sep"> و .. و </span>
+        <span class="red-word">الأحمر</span>
+      </span>
+      <span class="line color-parade">
+        <span class="blue-word">الأزرق منها</span>
+        <span class="sep"> و .. و </span>
+        <span class="yellow-word">الأصفر</span>
+      </span>
+      <span class="line green-line big-green">لكنك .. يا قمري الأخضر</span>
+      <span class="line refrain big-refrain">أحلى من كل الكلمات</span>
+      <span class="line refrain big-refrain">أكبر من كل الكلمات</span>
+    </div>
+
+    <div class="verse en-content">
+      <span class="line big">My lady!</span>
+      <span class="line">In this notebook</span>
+      <span class="line">You will find thousands of words —</span>
+      <span class="line color-parade">
+        <span class="white-word">The white among them</span>
+        <span class="sep">, and the </span>
+        <span class="red-word">red</span>
+      </span>
+      <span class="line color-parade">
+        <span class="blue-word">The blue among them</span>
+        <span class="sep">, and the </span>
+        <span class="yellow-word">yellow</span>
+      </span>
+      <span class="line green-line big-green">But you, my green moon —</span>
+      <span class="line refrain big-refrain">Are sweeter than all words</span>
+      <span class="line refrain big-refrain">Greater than all words</span>
+    </div>
+  </div>
+
+</section>
+
+<footer class="footer">
+  <div class="signature ar-content">— نزار قبّاني</div>
+  <div class="signature en-content"><em>— Nizar Qabbani</em></div>
+  <div class="meta ar-content">شاعر الحبّ · دمشق</div>
+  <div class="meta en-content">Poet of Love · Damascus</div>
+</footer>
+
+<script src="../shared/common.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>

@@ -38,11 +38,28 @@ ThinkofOthers/
 
 ---
 
+### 3. سيدتي — نزار قباني (My Lady — Nizar Qabbani)
+
+A warm notebook-aesthetic presentation of Qabbani's love poem, featuring aged paper layers, floating word particles, colour-coded verses (gold, red, green, blue), and a bilingual language toggle.
+
+**Files**
+```
+notebook-poem/
+├── index.html   — markup & content
+├── style.css    — all styles
+└── script.js    — IIFE-wrapped JS (cursor, constellation, word particles, language toggle)
+```
+
+📓 **[View live page](https://a-elnajjar.github.io/Arabic-Poetry-Interactive-Collection/notebook-poem/index.html)**
+
+---
+
 ## Structure
 
 ```
-maritime-poem/          — Nizar Qabbani poem
-ThinkofOthers/          — Mahmoud Darwish poem
+maritime-poem/          — Nizar Qabbani poem (القصيدة البحرية)
+ThinkofOthers/          — Mahmoud Darwish poem (فكِّر بغيرك)
+notebook-poem/          — Nizar Qabbani poem (سيدتي)
 README.md
 ```
 

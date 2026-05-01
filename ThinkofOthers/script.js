@@ -104,6 +104,32 @@ inView('.stanza', ({ target }) => {
   }
 }, { amount: 0.15 });
 
+// --- Divider reveals ---
+inView('.divider', ({ target }) => {
+  animate(target, { opacity: [0, 0.7], scaleX: [0.6, 1] }, {
+    duration: 0.6,
+    easing: 'ease-out',
+  });
+}, { amount: 0.5 });
+
+// --- Footer reveal ---
+inView('.footer', ({ target }) => {
+  animate(target, { opacity: [0, 1], y: [30, 0] }, {
+    duration: 0.8,
+    easing: 'ease-out',
+  });
+}, { amount: 0.3 });
+
+// --- Title entrance on load ---
+const titleWords = document.querySelectorAll('.title .word');
+if (titleWords.length > 0) {
+  animate(titleWords, { opacity: [0, 1], y: [30, 0] }, {
+    duration: 0.8,
+    delay: stagger(0.15, { start: 0.3 }),
+    easing: [0.25, 0.46, 0.45, 0.94],
+  });
+}
+
 // --- Spring hover on stanza cards (skip opening refrain) ---
 document.querySelectorAll('.stanza:not(.opening)').forEach((stanza) => {
   stanza.addEventListener('mouseenter', () => {

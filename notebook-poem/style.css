@@ -539,6 +539,36 @@ body.lang-en .footer .meta {
   100% { transform: translate(-50%, -50%) scale(13); opacity: 0; }
 }
 
+/* ============ MOTION.DEV ============ */
+
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--red) 33%, var(--blue) 66%, var(--green) 100%);
+  z-index: 10000;
+  transform-origin: 0% 50%;
+  pointer-events: none;
+}
+
+.stanza {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.divider {
+  opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.footer {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 640px) {
   .stanza { padding: 24px 18px; }

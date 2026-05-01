@@ -623,6 +623,36 @@ body.en-mode .verse .line:hover {
   transform: translateX(8px);
 }
 
+/* ============ MOTION.DEV ============ */
+
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--turquoise) 50%, var(--gold) 100%);
+  z-index: 10000;
+  transform-origin: 0% 50%;
+  pointer-events: none;
+}
+
+.stanza {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.divider {
+  opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.footer {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 600px) {
   .verse { font-size: 1.35rem; line-height: 2; }

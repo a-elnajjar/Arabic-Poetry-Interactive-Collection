@@ -619,6 +619,17 @@ body.lang-en .verse { direction: ltr; text-align: left; }
   will-change: transform, opacity;
 }
 
+.divider {
+  opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.footer {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 768px) {
   body { cursor: auto; }

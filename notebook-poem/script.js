@@ -189,7 +189,17 @@ if (ornament) {
 // Each character tumbles in with spring bounce easing
 const titleEl = document.querySelector('.title');
 if (titleEl) {
-  titleEl.querySelectorAll('span').forEach(span => {
+  const arSpan = titleEl.querySelector('.ar-content');
+  if (arSpan) {
+    arSpan.style.opacity = '0';
+    animate(arSpan, { opacity: [0, 1], y: [65, 0] }, {
+      duration: 0.85,
+      delay: 0.55,
+      easing: [0.34, 1.56, 0.64, 1],
+    });
+  }
+
+  titleEl.querySelectorAll('span:not(.ar-content)').forEach(span => {
     const text = span.textContent;
     span.textContent = '';
     [...text].forEach(char => {
@@ -200,11 +210,13 @@ if (titleEl) {
     });
   });
   const chars = titleEl.querySelectorAll('.title-char');
-  animate(chars, { opacity: [0, 1], y: [65, 0], rotateZ: [-22, 0] }, {
-    duration: 0.65,
-    delay: stagger(0.058, { start: 0.55 }),
-    easing: [0.34, 1.56, 0.64, 1],
-  });
+  if (chars.length) {
+    animate(chars, { opacity: [0, 1], y: [65, 0], rotateZ: [-22, 0] }, {
+      duration: 0.65,
+      delay: stagger(0.058, { start: 0.55 }),
+      easing: [0.34, 1.56, 0.64, 1],
+    });
+  }
 }
 
 // ─── 4. Eyebrow + Byline Fade-Up Sequence ────────────

@@ -541,18 +541,27 @@ body.lang-en .footer .meta {
 
 /* ============ MOTION.DEV ============ */
 
+/* Override CSS keyframe animations — Motion.dev takes over */
+.ornament   { animation: none; opacity: 1; }
+.eyebrow    { animation: none; }
+.scroll-cue { animation: none; }
+.title      { animation: none; opacity: 1; }
+.byline     { animation: none; }
+
+/* Reading progress bar */
 #reading-progress {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold) 0%, var(--red) 33%, var(--blue) 66%, var(--green) 100%);
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--red) 25%, var(--blue) 55%, var(--green) 80%, var(--gold-soft) 100%);
   z-index: 10000;
   transform-origin: 0% 50%;
   pointer-events: none;
 }
 
+/* Stanzas + dividers + footer start invisible; Motion reveals them */
 .stanza {
   opacity: 0;
   will-change: transform, opacity;
@@ -565,6 +574,75 @@ body.lang-en .footer .meta {
 }
 
 .footer {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ── Kinetic Title — character splitting ── */
+.title-char {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ── Dancing accent-line words ── */
+.dance-word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ── 3D perspective for stanza tilt effects ── */
+.poem {
+  perspective: 1400px;
+}
+
+/* ── Green Moon radial glow overlay ── */
+.moon-glow-pulse {
+  position: absolute;
+  inset: -44px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(56, 200, 112, 0.24) 0%,
+    rgba(26, 138, 72, 0.10) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  will-change: opacity, transform;
+}
+
+/* ── Ink SVG calligraphic underline ── */
+.ink-underline {
+  position: absolute;
+  bottom: 10px;
+  left: 24px;
+  right: 24px;
+  height: 12px;
+  pointer-events: none;
+  overflow: visible;
+  opacity: 0.32;
+}
+
+.ink-path {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Celebration burst particles ── */
+.celebration-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9995;
+  will-change: transform, opacity;
+}
+
+/* ── Final stanza — big climax lines start hidden for cinematic sequence ── */
+.stanza.final .big-green,
+.stanza.final .big-refrain {
   opacity: 0;
   will-change: transform, opacity;
 }

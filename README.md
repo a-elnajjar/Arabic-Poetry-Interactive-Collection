@@ -54,12 +54,29 @@ notebook-poem/
 
 ---
 
+### 4. عن الصمود — محمود درويش (On Steadfastness — Mahmoud Darwish)
+
+An earthy, grounded presentation of Darwish's 1964 poem of Palestinian resistance, from the collection *Olive Leaves*. Features a three-depth animated wheat field, falling olive leaves, rising ember sparks, and a warm soil-glow horizon — all rendered on a fixed canvas in deep earth tones.
+
+**Files**
+```
+on-steadfastness/
+├── index.html   — markup & content (3 sections, 6 stanzas, bilingual)
+├── style.css    — earth/olive/wheat gold colour palette
+└── script.js    — canvas VFX: wheat stalks, olive leaves, embers, shimmer
+```
+
+🌿 **[View live page](https://a-elnajjar.github.io/Arabic-Poetry-Interactive-Collection/on-steadfastness/index.html)**
+
+---
+
 ## Structure
 
 ```
 maritime-poem/          — Nizar Qabbani poem (القصيدة البحرية)
 ThinkofOthers/          — Mahmoud Darwish poem (فكِّر بغيرك)
 notebook-poem/          — Nizar Qabbani poem (سيدتي)
+on-steadfastness/       — Mahmoud Darwish poem (عن الصمود)
 README.md
 ```
 

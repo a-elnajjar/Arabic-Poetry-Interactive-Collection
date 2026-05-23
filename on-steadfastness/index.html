@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>عن الصمود — محمود درويش</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/common.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-ar">
+
+<canvas id="vfx-canvas"></canvas>
+<div class="earth-glow"></div>
+
+<div class="cursor" id="cursor">
+  <svg viewBox="0 0 24 24" fill="none">
+    <path d="M12 2 C16 5,18 13,12 22 C6 13,8 5,12 2Z" stroke="#c9a227" stroke-width="0.8" fill="rgba(201,162,39,0.07)" opacity="0.9"/>
+    <line x1="12" y1="2" x2="12" y2="22" stroke="#c9a227" stroke-width="0.4" opacity="0.45"/>
+    <circle cx="12" cy="12" r="1.1" fill="#c9a227" opacity="0.85"/>
+  </svg>
+</div>
+
+<div class="lang-toggle ar" id="langToggle">
+  <div class="slider"></div>
+  <button class="en" data-lang="en">EN</button>
+  <button class="ar active" data-lang="ar">ع</button>
+</div>
+
+<!-- =================== HERO =================== -->
+<section class="stage">
+  <div class="ornament">
+    <div class="line"></div>
+    <div class="diamond"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="eyebrow ar-content">محمود درويش · ١٩٤١ — ٢٠٠٨</div>
+  <div class="eyebrow en-content">Mahmoud Darwish · 1941 — 2008</div>
+
+  <h1 class="title">
+    <span class="word ar-content">عن الصمود</span>
+    <span class="word en-content">On Steadfastness</span>
+  </h1>
+
+  <p class="byline ar-content">من ديوان أوراق الزيتون · ١٩٦٤</p>
+  <p class="byline en-content"><em>from Olive Leaves · 1964</em></p>
+
+  <div class="scroll-cue ar-content">اقرأ</div>
+  <div class="scroll-cue en-content">READ</div>
+</section>
+
+<!-- =================== POEM =================== -->
+<section class="poem">
+
+  <!-- STANZA I — The Olive Tree -->
+  <div class="stanza" data-stanza>
+    <div class="stanza-label ar-content">١</div>
+    <div class="stanza-label en-content">I</div>
+    <div class="verse ar-content">
+      <span class="line">لو يذكرُ الزيتونُ غارِسَهُ</span>
+      <span class="line accent">لصار الزيتُ دمعا!</span>
+      <span class="line">يا حكمةَ الأجدادِ لو من لحمِنا نُعطيكِ دِرعا!</span>
+      <span class="line">لكنَّ سهلَ الريحِ، لا يُعطي عبيدَ الريحِ زَرعا!</span>
+      <span class="line">إنَّا سنقلعُ بالرموشِ الشوكَ والأحزانَ... قلعا!</span>
+      <span class="line">وإلامَ نحملُ عارَنا وصليبَنا! والكونُ يسعى...</span>
+      <span class="line big">سنظلُّ في الزيتونِ خضرتَهُ، وحولَ الأرضِ دِرعا!</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">If the olive trees remembered those who planted them,</span>
+      <span class="line accent">their oil would turn to tears!</span>
+      <span class="line">O wisdom of our ancestors — if only our flesh could forge you a shield!</span>
+      <span class="line">But the wind's plain gives nothing to the servants of the wind!</span>
+      <span class="line">We shall uproot with our very lashes thorns and sorrows — clean!</span>
+      <span class="line">How long must we carry our shame and our cross while the world races on...</span>
+      <span class="line big">We shall remain — the olive tree's own greenness — a shield around the earth!</span>
+    </div>
+  </div>
+
+  <div class="divider" data-stanza>
+    <div class="line"></div>
+    <div class="wave">✦</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA II — The Wheat -->
+  <div class="stanza" data-stanza>
+    <div class="stanza-label ar-content">٢</div>
+    <div class="stanza-label en-content">II</div>
+    <div class="verse ar-content">
+      <span class="line">إنَّا نُحبُّ الوردَ، لكنَّا نُحبُّ القمحَ أكثر</span>
+      <span class="line">ونُحبُّ عطرَ الوردِ، لكنَّ السنابلَ منهُ أطهر</span>
+      <span class="line">فاحموا سنابلَكم من الأعصارِ بالصدرِ المسمَّر</span>
+      <span class="line">هاتوا السياجَ من الصدورِ... من الصدورِ؛ فكيفَ يُكسر؟!</span>
+      <span class="line accent">اقبِض على عُنُقِ السنابلِ مثلما عانقتَ خنجر!</span>
+      <span class="line">الأرضُ، والفلَّاحُ، والإصرارُ، قُل لي: كيفَ تَقهر...</span>
+      <span class="line big">هذي الأقانيمَ الثلاثةَ، كيفَ تقهر؟</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">We love the rose, but we love wheat more —</span>
+      <span class="line">We love the rose's scent, but the wheat stalk is purer.</span>
+      <span class="line">Guard your stalks from the storms with a nail-hardened chest —</span>
+      <span class="line">Build your fence from your chests... from your chests; how can it be broken?!</span>
+      <span class="line accent">Grip the neck of the wheat stalk as you would embrace a dagger!</span>
+      <span class="line">Earth, and farmer, and resolve — tell me: how can you conquer...</span>
+      <span class="line big">these three — how can you conquer them?</span>
+    </div>
+  </div>
+
+  <div class="divider" data-stanza>
+    <div class="line"></div>
+    <div class="wave">✦ ✦ ✦</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA III-A — The Friend's Eyes -->
+  <div class="stanza" data-stanza>
+    <div class="stanza-label ar-content">٣</div>
+    <div class="stanza-label en-content">III</div>
+    <div class="verse ar-content">
+      <span class="line">عيناكِ يا صديقتي العجوزُ، يا صديقتي المراهِقة</span>
+      <span class="line accent">عيناكِ شحَّاذانِ في ليلِ الزوايا الخانقة</span>
+      <span class="line">لا يضحكُ الرجاءُ فيهما، ولا تنامُ الصاعقة</span>
+      <span class="line">لم يبقَ شيءٌ عندنا... إلَّا الدموعُ الغارقة</span>
+      <span class="line big">قولي: متى ستضحكينَ مرةً، وإن تكن منافقة؟!</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">Your eyes, my old friend, my young friend —</span>
+      <span class="line accent">your eyes are two beggars in the strangling night of corners —</span>
+      <span class="line">hope does not smile in them, nor does lightning sleep.</span>
+      <span class="line">Nothing remains for us... but drowning tears.</span>
+      <span class="line big">Tell me: when will you laugh once, even if it is a lie?!</span>
+    </div>
+  </div>
+
+  <div class="divider sub" data-stanza>
+    <div class="line"></div>
+    <div class="wave">·</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA III-B — After Us, the Flood -->
+  <div class="stanza" data-stanza>
+    <div class="verse ar-content">
+      <span class="line">كفاكِ يا صديقتي ذئبانِ جائعان</span>
+      <span class="line">مُصِّي بقايا دمنا، وبعدَنا الطوفان</span>
+      <span class="line">وإن سغِبتِ مرةً، لا تتركي الجثمان</span>
+      <span class="line">وإن سئِمتِ بعدها، فعندكِ الديدان</span>
+      <span class="line">إنَّا خُلِقنا غَلطةً... في غفلةٍ من الزمان</span>
+      <span class="line">وأنتِ يا صديقي العجوزُ... يا صديقتي المراهقة</span>
+      <span class="line big accent">كوني على أشلائنا، كالزنبقاتِ العابقة!</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">Two hungry wolves are enough for you, my friend —</span>
+      <span class="line">drain what remains of our blood; and after us, the flood.</span>
+      <span class="line">If you hunger once, do not leave the corpse.</span>
+      <span class="line">If you tire of it then, you still have your worms.</span>
+      <span class="line">We were born a mistake... in a moment of time's inattention.</span>
+      <span class="line">And you, my old friend... my young friend —</span>
+      <span class="line big accent">on our remains, bloom as lilies in full fragrance!</span>
+    </div>
+  </div>
+
+  <div class="divider sub" data-stanza>
+    <div class="line"></div>
+    <div class="wave">·</div>
+    <div class="line"></div>
+  </div>
+
+  <!-- STANZA III-C — The Forest (closing) -->
+  <div class="stanza final" data-stanza>
+    <div class="verse ar-content">
+      <span class="line">الغابُ يا صديقتي يُكفِّنُ الأسرار</span>
+      <span class="line">وحولَنا الأشجارُ لا تُهرِّبُ الأخبار</span>
+      <span class="line">والشمسُ عندَ بابِنا مُعمَّاةُ الأنوار</span>
+      <span class="line">واشيةٌ، لكنَّها لا تَعبُرُ الأسوار</span>
+      <span class="line">إنَّ الحياةَ خلفَنا غريبةٌ منافقة</span>
+      <span class="line big">فابني على عِظامِنا دارَ عَلاكِ الشاهقة</span>
+    </div>
+    <div class="verse en-content">
+      <span class="line">The forest, my friend, shrouds all secrets in its folds —</span>
+      <span class="line">the trees around us carry no news away.</span>
+      <span class="line">The sun at our gate is blinded of its light —</span>
+      <span class="line">an informer, yet it cannot cross the walls.</span>
+      <span class="line">The life behind us is strange and full of lies —</span>
+      <span class="line big">build upon our bones your towering high abode!</span>
+    </div>
+  </div>
+
+</section>
+
+<footer class="footer">
+  <div class="foot-inner">
+    <div class="signature ar-content">— محمود درويش</div>
+    <div class="signature en-content"><em>— Mahmoud Darwish</em></div>
+    <div class="meta ar-content">أوراق الزيتون · ١٩٦٤</div>
+    <div class="meta en-content">Olive Leaves · 1964</div>
+  </div>
+</footer>
+
+<script src="../shared/common.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>

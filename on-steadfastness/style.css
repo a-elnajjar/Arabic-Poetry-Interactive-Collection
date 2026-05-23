@@ -1,0 +1,266 @@
+/* ============ BACKGROUND ============ */
+body {
+  background: linear-gradient(180deg,
+    #0c0a07 0%,
+    #100e0a 50%,
+    #1b1208 100%
+  );
+  color: #f0e8d4;
+}
+
+/* ============ VFX CANVAS ============ */
+#vfx-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============ EARTH GLOW ============ */
+.earth-glow {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45vh;
+  background: radial-gradient(
+    ellipse 100% 70% at 50% 115%,
+    rgba(168, 92, 16, 0.16) 0%,
+    rgba(110, 58, 10, 0.09) 45%,
+    transparent 72%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============ LANG TOGGLE THEME ============ */
+.lang-toggle {
+  background: rgba(12, 10, 7, 0.78);
+}
+
+.lang-toggle .slider {
+  background: rgba(145, 95, 16, 0.42);
+}
+
+.lang-toggle button {
+  color: rgba(240, 232, 212, 0.4);
+}
+
+.lang-toggle button.active {
+  color: #c9a227;
+}
+
+/* ============ STAGE ============ */
+.stage {
+  z-index: 2;
+}
+
+.eyebrow {
+  color: rgba(201, 162, 39, 0.7);
+}
+
+/* ============ TITLE ============ */
+.title {
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: clamp(2.8rem, 8.5vw, 6.8rem);
+  font-weight: 700;
+  color: #f0e8d4;
+  text-align: center;
+  line-height: 1.15;
+  margin: 1.5rem 0 1rem;
+  text-shadow: 0 0 80px rgba(201, 162, 39, 0.18), 0 2px 40px rgba(0,0,0,0.6);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: fadeIn 2.5s 0.5s ease forwards;
+}
+
+.title .en-content {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+/* ============ BYLINE ============ */
+.byline {
+  font-family: 'Marcellus', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.32em;
+  color: rgba(201, 162, 39, 0.55);
+  margin-top: 0.5rem;
+  opacity: 0;
+  animation: fadeIn 2s 1.6s ease forwards;
+}
+
+/* ============ SCROLL CUE ============ */
+.scroll-cue {
+  color: rgba(201, 162, 39, 0.45);
+}
+
+/* ============ POEM SECTION ============ */
+.poem {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 2vh 2.5rem 28vh;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============ STANZA ============ */
+.stanza {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+}
+
+.stanza.final {
+  padding-bottom: 6rem;
+}
+
+/* ============ STANZA LABEL ============ */
+.stanza-label {
+  font-family: 'Marcellus', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.55em;
+  color: rgba(201, 162, 39, 0.45);
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+}
+
+/* ============ VERSE & LINES ============ */
+.verse {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.line {
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.22rem);
+  line-height: 1.95;
+  color: rgba(240, 232, 212, 0.78);
+  display: block;
+  transition: color 0.3s ease;
+}
+
+.line.accent {
+  font-size: clamp(1.05rem, 2.6vw, 1.42rem);
+  color: #c9a227;
+  font-weight: 500;
+}
+
+.line.big {
+  font-size: clamp(1.2rem, 3.1vw, 1.72rem);
+  color: #f0e8d4;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-shadow: 0 0 30px rgba(201, 162, 39, 0.12);
+}
+
+.line.big.accent {
+  color: #d4ac2e;
+  font-weight: 700;
+  text-shadow: 0 0 40px rgba(212, 172, 46, 0.2);
+}
+
+/* ---- English overrides ---- */
+body.lang-en .line {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.3vw, 1.28rem);
+  font-weight: 300;
+  line-height: 2;
+}
+
+body.lang-en .line.accent {
+  font-size: clamp(1.08rem, 2.6vw, 1.45rem);
+  font-weight: 400;
+}
+
+body.lang-en .line.big {
+  font-size: clamp(1.2rem, 2.9vw, 1.65rem);
+  font-weight: 400;
+}
+
+body.lang-en .line.big.accent {
+  font-weight: 500;
+}
+
+/* ============ DIVIDERS ============ */
+.divider .wave {
+  color: rgba(201, 162, 39, 0.45);
+  font-size: 0.95rem;
+  letter-spacing: 0.5em;
+}
+
+.divider.sub {
+  margin: 1.5rem auto;
+}
+
+.divider.sub .line {
+  width: 36px;
+  opacity: 0.45;
+}
+
+.divider.sub .wave {
+  font-size: 1.4rem;
+  color: rgba(201, 162, 39, 0.3);
+}
+
+/* ============ ORNAMENT THEME ============ */
+.ornament .diamond {
+  background: rgba(201, 162, 39, 0.85);
+  box-shadow: 0 0 10px rgba(201, 162, 39, 0.5);
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  padding: 5rem 2rem 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.foot-inner {
+  max-width: 840px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signature {
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(201, 162, 39, 0.65);
+  margin-bottom: 0.6rem;
+}
+
+body.lang-en .signature {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+
+.meta {
+  font-family: 'Marcellus', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.38em;
+  color: rgba(240, 232, 212, 0.3);
+  text-transform: uppercase;
+}
+
+/* ============ HOVER: illuminate lines on hover ============ */
+.stanza:hover .line {
+  color: rgba(240, 232, 212, 0.92);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+  .poem {
+    padding: 2vh 1.2rem 22vh;
+  }
+
+  .stanza {
+    padding: 2.5rem 0.8rem;
+  }
+
+  .title {
+    font-size: clamp(2.2rem, 11vw, 3.5rem);
+  }
+}

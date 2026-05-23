@@ -8,7 +8,11 @@
   let leaves = [];
   let embers = [];
   let stalks = [];
+  let touchRipples = [];
+  let scrollDust = [];
   let t = 0;
+  let scrollVelocity = 0;
+  let lastScrollY = 0;
 
   // ====================================================
   // RESIZE + WHEAT STALKS
@@ -243,6 +247,119 @@
   }
 
   // ====================================================
+  // TOUCH RIPPLES
+  // ====================================================
+  function addTouchRipple(x, y) {
+    touchRipples.push({ x, y, life: 0, maxLife: 55, maxRadius: 48 + Math.random() * 28 });
+
+    // Burst a few leaves from touch point
+    for (let i = 0; i < 3; i++) {
+      const l = newLeaf();
+      l.x = x + (Math.random() - 0.5) * 60;
+      l.y = y + (Math.random() - 0.5) * 30;
+      l.speed *= 1.8;
+      leaves.push(l);
+    }
+    if (leaves.length > 44) leaves.length = 44;
+
+    // Burst an ember from touch point
+    const e = newEmber();
+    e.x = x + (Math.random() - 0.5) * 40;
+    e.y = y;
+    e.speedY = 0.8 + Math.random() * 1.5;
+    embers.push(e);
+    if (embers.length > 68) embers.length = 68;
+  }
+
+  function drawTouchRipples() {
+    for (let i = touchRipples.length - 1; i >= 0; i--) {
+      const r = touchRipples[i];
+      r.life++;
+      if (r.life >= r.maxLife) { touchRipples.splice(i, 1); continue; }
+
+      const progress = r.life / r.maxLife;
+      const radius = 4 + progress * r.maxRadius;
+      const alpha = (1 - progress) * 0.7;
+
+      ctx.save();
+
+      // Outer expanding ring
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(201,162,39,${alpha})`;
+      ctx.lineWidth = 1.8 * (1 - progress * 0.6);
+      ctx.stroke();
+
+      // Second inner ring, offset in time
+      if (progress > 0.15) {
+        const r2 = radius * 0.55;
+        const a2 = (1 - progress) * 0.35;
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r2, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(212,172,46,${a2})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Centre glow that fades fast
+      if (progress < 0.25) {
+        const glowAlpha = (1 - progress / 0.25) * 0.9;
+        const glow = ctx.createRadialGradient(r.x, r.y, 0, r.x, r.y, 12);
+        glow.addColorStop(0, `rgba(212,172,46,${glowAlpha})`);
+        glow.addColorStop(1, 'rgba(212,172,46,0)');
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, 12, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  // ====================================================
+  // SCROLL DUST
+  // ====================================================
+  function addScrollDust(count) {
+    for (let i = 0; i < count; i++) {
+      scrollDust.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        size: 0.8 + Math.random() * 1.8,
+        speedX: (Math.random() - 0.5) * 1.8,
+        speedY: -0.6 - Math.random() * 1.6,
+        life: 0,
+        maxLife: 28 + Math.floor(Math.random() * 22),
+        r: 195 + Math.floor(Math.random() * 20),
+        g: 150 + Math.floor(Math.random() * 25),
+      });
+    }
+    if (scrollDust.length > 80) scrollDust.length = 80;
+  }
+
+  function drawScrollDust() {
+    for (let i = scrollDust.length - 1; i >= 0; i--) {
+      const p = scrollDust[i];
+      p.life++;
+      if (p.life >= p.maxLife) { scrollDust.splice(i, 1); continue; }
+      p.x += p.speedX;
+      p.y += p.speedY;
+
+      const progress = p.life / p.maxLife;
+      const alpha = Math.sin(progress * Math.PI) * 0.55;
+
+      ctx.save();
+      ctx.shadowBlur = 5;
+      ctx.shadowColor = `rgba(${p.r},${p.g},30,${alpha * 0.6})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * (1 - progress * 0.4), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.r},${p.g},30,${alpha})`;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // ====================================================
   // PARALLAX SHIMMER — subtle horizontal grain texture
   // ====================================================
   let shimmerOffset = 0;
@@ -264,11 +381,16 @@
     ctx.clearRect(0, 0, W, H);
     t++;
 
+    // Decay scroll velocity each frame
+    scrollVelocity *= 0.88;
+
     drawShimmer();
     drawSoil();
     drawEmbers();
     drawStalks();
     drawLeaves();
+    drawScrollDust();
+    drawTouchRipples();
 
     requestAnimationFrame(animate);
   }
@@ -277,6 +399,30 @@
   // BOOT
   // ====================================================
   window.addEventListener('resize', resize);
+
+  // Touch ripples
+  window.addEventListener('touchstart', (e) => {
+    for (const touch of e.changedTouches) {
+      addTouchRipple(touch.clientX, touch.clientY);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    for (const touch of e.changedTouches) {
+      if (Math.random() < 0.25) addTouchRipple(touch.clientX, touch.clientY);
+    }
+  }, { passive: true });
+
+  // Scroll dust
+  window.addEventListener('scroll', () => {
+    const currentY = window.scrollY;
+    const delta = Math.abs(currentY - lastScrollY);
+    lastScrollY = currentY;
+    scrollVelocity = delta;
+    const dustCount = Math.min(Math.floor(delta / 12), 6);
+    if (dustCount > 0) addScrollDust(dustCount);
+  }, { passive: true });
+
   resize();
   init();
   animate();

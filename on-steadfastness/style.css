@@ -1,10 +1,15 @@
 /* ============ BACKGROUND ============ */
+html {
+  background: #0c0a07;
+}
+
 body {
   background: linear-gradient(180deg,
     #0c0a07 0%,
     #100e0a 50%,
     #1b1208 100%
   );
+  background-attachment: fixed;
   color: #f0e8d4;
 }
 

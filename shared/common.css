@@ -228,6 +228,9 @@ body.lang-ar .en-content { display: none; }
 body.lang-en .ar-content { display: none; }
 body.lang-en { direction: ltr; }
 
+/* Arabic is a connected script — letter-spacing breaks glyph connections */
+body .ar-content { letter-spacing: 0; }
+
 /* ============ LANGUAGE SWITCH FADE ============ */
 .poem, .stage, .footer {
   transition: opacity 0.3s ease;

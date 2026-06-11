@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>حصانٌ يهبطُ من تلّةٍ بيضاء — تجربة تفاعلية</title>
+<title>حصانٌ يهبطُ من تلّةٍ بيضاء — مريد البرغوثي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -217,6 +217,15 @@ section {
   padding: 12vh 6vw;
 }
 
+#title-card p.poet {
+  margin-bottom: 1.4rem;
+  color: var(--gold);
+  font-size: clamp(.95rem, 2vw, 1.15rem);
+  letter-spacing: .04em;
+  text-align: center;
+  opacity: .9;
+}
+
 #title-card h1 {
   font-size: clamp(2rem, 6vw, 3.6rem);
   font-weight: 700;
@@ -296,6 +305,23 @@ section {
   transition: opacity 2.5s ease 1s;
 }
 #final-section .stanza.visible ~ #epilogue { opacity: .7; }
+
+#signature {
+  margin-top: 2.6rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 2.5s ease .6s;
+}
+#final-section .stanza.visible ~ #signature { opacity: 1; }
+#signature .name {
+  color: var(--gold);
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+}
+#signature .meta {
+  margin-top: .5rem;
+  color: var(--ink-dim);
+  font-size: .9rem;
+}
 
 /* ---------- controls ---------- */
 #wind-toggle {
@@ -390,6 +416,7 @@ section {
 <main id="poem">
 
   <section id="title-card">
+    <p class="poet">مريد البرغوثي · ١٩٤٤—٢٠٢١</p>
     <h1>حصانٌ يهبطُ<br>من تلّةٍ بيضاء</h1>
     <p class="tagline">تجربةٌ تفاعليّة</p>
     <p class="howto">
@@ -456,6 +483,10 @@ section {
       <span id="final-line">ولا تسقطْ تمامًا يا حصانْ!</span>
     </div>
     <p id="epilogue">اقتربْ بالمؤشّر من السطرِ الأخير…</p>
+    <div id="signature">
+      <div class="name">— مريد البرغوثي</div>
+      <div class="meta">شاعر فلسطين · دير غسّانة</div>
+    </div>
   </section>
 
 </main>

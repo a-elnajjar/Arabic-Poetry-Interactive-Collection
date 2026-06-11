@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/horse-sprites.png">
 <style>
 /* ============================================================
    حصانٌ يهبطُ من تلّةٍ بيضاء — single-file interactive poem
@@ -155,28 +156,33 @@ body {
   z-index: 3;
   filter: drop-shadow(0 6px 8px rgba(10, 10, 12, 0.35));
 }
-#horse svg { display: block; width: 100%; height: auto; overflow: visible; }
-
 .horse-inner { transform-origin: 50% 94%; }
 
-/* breathing — subtle ribcage swell */
-#h-body {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  animation: breathe 3.8s ease-in-out infinite;
+/* sprite-sheet gaits — 8 columns × 2 rows of 440×320 frames
+   (top row: walk, bottom row: gallop) */
+.horse-sprite {
+  width: 100%;
+  aspect-ratio: 440 / 320;
+  background-image: url('assets/horse-sprites.png');
+  background-repeat: no-repeat;
+  background-size: 800% 200%;
+  background-position: 0% 0%;                 /* walk row */
+  animation: horse-gait .9s steps(8, jump-none) infinite;
 }
-@keyframes breathe {
-  0%, 100% { transform: scale(1, 1); }
-  50%      { transform: scale(1.012, 1.03); }
+@keyframes horse-gait {
+  from { background-position-x: 0%; }
+  to   { background-position-x: 100%; }
 }
 
-/* head raise (proud) — pivot at the base of the neck */
-#h-head {
-  transform-box: fill-box;
-  transform-origin: 95% 78%;
-  transition: transform .45s cubic-bezier(.34, 1.4, .5, 1);
+/* gallop — bottom row, faster stride */
+#horse.galloping .horse-sprite,
+.horse-inner.leap .horse-sprite {
+  background-position-y: 100%;
+  animation-duration: .55s;
 }
-#horse.proud #h-head { transform: rotate(13deg); }
+
+/* mid-stumble the legs freeze on the current frame */
+.horse-inner.stumble .horse-sprite { animation-play-state: paused; }
 
 /* stumble — pitches forward, catches itself, never falls */
 .horse-inner.stumble { animation: stumble .95s cubic-bezier(.3,.6,.4,1); }
@@ -330,7 +336,8 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #final-line, #stars, .mist, #next-hint, .cloud { animation: none !important; }
+  #final-line, #stars, .mist, #next-hint, .cloud,
+  .horse-sprite { animation: none !important; }
   .stanza { transition-duration: .3s; }
   html { scroll-behavior: auto; }
 }
@@ -371,71 +378,9 @@ section {
 
   <!-- the aging horse -->
   <div id="horse" title="حصان">
-    <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!-- faint moonlight falling on the back and crest -->
-        <linearGradient id="horse-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="160">
-          <stop offset="0" stop-color="#33291a"/>
-          <stop offset=".4" stop-color="#1a1611"/>
-          <stop offset="1" stop-color="#100d0a"/>
-        </linearGradient>
-      </defs>
-      <g class="horse-inner" fill="url(#horse-grad)">
-        <!-- tail -->
-        <path d="M148,66
-                 C163,71 173,85 176,101
-                 C178,118 174,132 167,143
-                 C164,130 158,114 155,101
-                 C152,89 149,78 143,73 Z"/>
-        <!-- body + legs -->
-        <path id="h-body" d="M82,62
-                 C98,55 116,54 132,58
-                 C143,60 152,65 156,73
-                 C159,79 159,86 156,92
-                 C161,98 164,105 163,112
-                 C161,120 161,130 162,140
-                 L163,146 L163,150 L155,150 L155,146
-                 C154,136 153,126 153,116
-                 L152,111
-                 C150,103 147,96 142,91
-                 C143,99 143,106 141,113
-                 C138,122 138,132 139,141
-                 L140,146 L139,150 L131,150 L132,146
-                 C133,136 132,126 133,118
-                 C134,110 134,102 134,97
-                 C126,96 116,98 108,98
-                 C101,98 96,96 93,95
-                 C96,104 96,116 95,128
-                 C95,138 96,142 96,146
-                 L95,150 L87,150 L87,146
-                 C87,140 87,134 87,128
-                 C86,116 85,106 81,97
-                 L79,97
-                 C77,106 75,118 72,128
-                 C70,138 70,143 69,147
-                 L68,150 L61,150 L62,146
-                 C64,138 65,130 66,124
-                 C67,112 67,103 67,99
-                 C65,92 64,84 65,77
-                 C66,69 72,64 82,62 Z"/>
-        <!-- neck + head (raised when proud) -->
-        <path id="h-head" d="M20,46
-                 C26,36 34,25 42,16
-                 L46,13 L47,3 L51,12
-                 L55,11 L60,4 L61,13
-                 C66,20 72,30 78,41
-                 C77,44 79,46 81,44
-                 C86,53 91,63 94,72
-                 C93,75 95,77 97,75
-                 C99,83 100,90 100,98
-                 L82,98
-                 C76,84 68,68 58,52
-                 L56,48
-                 C55,44 51,41 47,43
-                 L29,53
-                 C24,54 20,51 20,47 Z"/>
-      </g>
-    </svg>
+    <div class="horse-inner">
+      <div class="horse-sprite"></div>
+    </div>
   </div>
 
   <div class="mist m2"></div>
@@ -449,7 +394,7 @@ section {
     <p class="tagline">تجربةٌ تفاعليّة</p>
     <p class="howto">
       مرِّرْ — أو انقرِ السهمَ — لتنزلَ مع الحصانِ مِن التلّة.<br>
-      مرِّرِ المؤشّرَ فوقَهُ يرفعْ رأسَهُ شامخًا، وانقرْ غيمةً يَثِبْ إليها فيخمشْها.
+      مرِّرِ المؤشّرَ فوقَهُ يرمحْ مرّةً أخرى، وانقرْ غيمةً يَثِبْ إليها فيخمشْها.
     </p>
   </section>
 
@@ -583,13 +528,15 @@ section {
     tCurrent += (target - tCurrent) * Math.min(1, dt * 0.0022);
 
     const hw = horse.offsetWidth;
-    const hh = hw * (160 / 220);
+    const hh = hw * (320 / 440);               // sprite frame ratio
     const bob = Math.sin(now / 460) * 1.6;     // walking bob
     const x = tCurrent * W - hw / 2;
-    const y = hillTopY(tCurrent) - hh * 0.94 + bob;
+    const y = hillTopY(tCurrent) - hh * 0.96 + bob;
     horse.style.transform =
       'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) ' +
       'rotate(' + slopeAngleDeg(tCurrent).toFixed(2) + 'deg)';
+
+    updateGait(now, Math.abs(target - tCurrent) * W);
 
     applyParallax();
     updateGlow();
@@ -610,15 +557,22 @@ section {
     hillsSvg.style.transform = 'translate3d(0,' + (p * -14) + 'px,0)';
   }
 
-  /* ---------- proud head (hover / tap) ---------- */
-  let proudTimer = null;
-  function beProud() {
-    horse.classList.add('proud');
-    clearTimeout(proudTimer);
-    proudTimer = setTimeout(() => horse.classList.remove('proud'), 1100);
+  /* ---------- gait: walk by default, gallop when pushed ---------- */
+  // gallops while the scroll drags it down the hill fast (with hysteresis
+  // so it doesn't flicker between gaits), or for a burst on hover / tap
+  let gallopUntil = 0, isGalloping = false;
+
+  function updateGait(now, gapPx) {
+    const galloping = now < gallopUntil || gapPx > (isGalloping ? 30 : 90);
+    if (galloping !== isGalloping) {
+      isGalloping = galloping;
+      horse.classList.toggle('galloping', galloping);
+    }
   }
-  horse.addEventListener('mouseenter', beProud);
-  horse.addEventListener('click', beProud);
+
+  function gallopBurst() { gallopUntil = performance.now() + 1400; }
+  horse.addEventListener('mouseenter', gallopBurst);
+  horse.addEventListener('click', gallopBurst);
 
   /* ---------- occasional stumble — but never a fall ---------- */
   function scheduleStumble() {

@@ -70,9 +70,9 @@ on-steadfastness/
 
 ---
 
-### 5. حصانٌ يهبطُ من تلّةٍ بيضاء (A Horse Descends a White Hill)
+### 5. حصانٌ يهبطُ من تلّةٍ بيضاء — مريد البرغوثي (A Horse Descends a White Hill — Mourid Barghouti)
 
-A dark cinematic experience of a poem about an aging horse descending a misty white hill at dusk. A sprite-sheet horse silhouette (16 hand-drawn frames: an 8-frame walk cycle and an 8-frame gallop) walks down the hill as you scroll, breaks into a gallop when the scroll drags it fast or on hover, occasionally stumbles (but never falls), and leaps to scratch clouds when they're clicked — leaving faint hoof marks. Arabic-only verses (Amiri font) fade in like mist on scroll, ending in a trembling «ولا تسقطْ تمامًا يا حصانْ!» that glows as the cursor approaches. Includes gentle parallax and a synthesized wind-sound toggle.
+A dark cinematic experience of Barghouti's poem about an aging horse descending a misty white hill at dusk. A sprite-sheet horse silhouette (16 hand-drawn frames: an 8-frame walk cycle and an 8-frame gallop) walks down the hill as you scroll, breaks into a gallop when the scroll drags it fast or on hover, occasionally stumbles (but never falls), and leaps to scratch clouds when they're clicked — leaving faint hoof marks. Arabic-only verses (Amiri font) fade in like mist on scroll, ending in a trembling «ولا تسقطْ تمامًا يا حصانْ!» that glows as the cursor approaches. Includes gentle parallax and a synthesized wind-sound toggle.
 
 **Files**
 ```
@@ -92,7 +92,7 @@ maritime-poem/          — Nizar Qabbani poem (القصيدة البحرية)
 ThinkofOthers/          — Mahmoud Darwish poem (فكِّر بغيرك)
 notebook-poem/          — Nizar Qabbani poem (سيدتي)
 on-steadfastness/       — Mahmoud Darwish poem (عن الصمود)
-horse-poem/             — single-file horse poem (حصانٌ يهبطُ من تلّةٍ بيضاء)
+horse-poem/             — Mourid Barghouti poem (حصانٌ يهبطُ من تلّةٍ بيضاء)
 README.md
 ```
 

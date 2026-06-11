@@ -205,6 +205,105 @@ body {
   100% { transform: translateY(0)     rotate(0deg); }
 }
 
+/* cough — «يسعى ويسعل» — two heaving dips, legs frozen */
+.horse-inner.cough .horse-sprite { animation-play-state: paused; }
+.horse-inner.cough { animation: cough .95s ease; }
+@keyframes cough {
+  0%   { transform: translateY(0)   rotate(0deg); }
+  18%  { transform: translateY(4px) rotate(-4.5deg) scale(1.02, .96); }
+  34%  { transform: translateY(0)   rotate(-1deg); }
+  50%  { transform: translateY(5px) rotate(-5.5deg) scale(1.02, .95); }
+  72%  { transform: translateY(0)   rotate(1.2deg); }
+  100% { transform: translateY(0)   rotate(0deg); }
+}
+
+/* rear — «ولا تسقطْ تمامًا» — rises on its hind legs, refuses the fall */
+.horse-inner.rear .horse-sprite { background-position-y: 100%; }
+.horse-inner.rear { animation: rear 1.9s cubic-bezier(.34,.5,.35,1); }
+@keyframes rear {
+  0%   { transform: rotate(0deg)  translateY(0); }
+  22%  { transform: rotate(15deg) translateY(-7px); }
+  42%  { transform: rotate(20deg) translateY(-10px); }
+  62%  { transform: rotate(16deg) translateY(-6px); }
+  100% { transform: rotate(0deg)  translateY(0); }
+}
+
+/* vanish — «إن همزناهُ اختفى في لمحتين» */
+#horse { transition: opacity .45s ease, filter .45s ease; }
+#horse.vanish { opacity: .07; filter: drop-shadow(0 6px 8px rgba(10,10,12,.35)) blur(5px); }
+
+/* breath vapour from the muzzle — «عُرفُهُ المُبتلُّ يلهثُ» */
+#fx { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.breath {
+  position: absolute;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(231,228,221,.55), transparent 70%);
+  filter: blur(2px);
+  pointer-events: none;
+  animation: breath-rise 1.7s ease-out forwards;
+}
+@keyframes breath-rise {
+  from { transform: translate(0, 0)        scale(.45); opacity: .85; }
+  to   { transform: translate(-30px, -38px) scale(2.2); opacity: 0; }
+}
+
+/* hoofprints fading in the snow of the hill */
+#hoofprints { position: absolute; inset: 0; pointer-events: none; }
+.hoofprint {
+  position: absolute;
+  width: 10px; height: 6px;
+  border-radius: 50%;
+  background: rgba(96, 90, 78, .5);
+  box-shadow: 15px 3px 0 -1px rgba(96, 90, 78, .38);
+  animation: print-fade 7s ease forwards;
+}
+@keyframes print-fade { from { opacity: .75; } to { opacity: 0; } }
+
+/* shooting star on sky click */
+.meteor {
+  position: absolute;
+  width: 95px; height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to right, transparent, rgba(255, 250, 235, .95));
+  box-shadow: 0 0 6px rgba(255, 250, 235, .4);
+  rotate: 147deg;
+  pointer-events: none;
+  animation: meteor-fall .9s ease-out forwards;
+}
+@keyframes meteor-fall {
+  from { translate: 0 0;          opacity: 1; }
+  to   { translate: -150px 98px;  opacity: 0; }
+}
+
+/* gold sparks when the final line is steadied */
+.spark {
+  position: fixed;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  box-shadow: 0 0 9px rgba(232, 200, 122, .9);
+  pointer-events: none;
+  z-index: 30;
+  animation: spark-fly 1.1s ease-out forwards;
+}
+@keyframes spark-fly {
+  from { translate: 0 0;                opacity: 1; scale: 1; }
+  to   { translate: var(--dx) var(--dy); opacity: 0; scale: .3; }
+}
+
+/* clickable poem words that command the horse */
+.word-action {
+  color: var(--gold);
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(201, 168, 106, .45);
+  transition: color .3s, text-shadow .3s;
+}
+.word-action:hover {
+  color: var(--gold-bright);
+  text-shadow: 0 0 14px rgba(232, 200, 122, .55);
+}
+
 /* ---------- scrollable poem layers ---------- */
 #poem { position: relative; z-index: 5; }
 
@@ -215,7 +314,11 @@ section {
   align-items: center;
   justify-content: center;
   padding: 12vh 6vw;
+  /* let clicks fall through the empty section to the scene
+     (clouds, horse, sky) — the text itself stays interactive */
+  pointer-events: none;
 }
+section > * { pointer-events: auto; }
 
 #title-card p.poet {
   margin-bottom: 1.4rem;
@@ -275,6 +378,7 @@ section {
 
 #final-line {
   --g: 0;
+  cursor: pointer;
   display: inline-block;
   margin-top: 1.2rem;
   font-weight: 700;
@@ -296,6 +400,9 @@ section {
   70%      { transform: translate(.8px, .3px)  rotate(.18deg); }
   84%      { transform: translate(-.4px, -.7px) rotate(-.12deg); }
 }
+
+/* once clicked, the line steadies — the horse did not fall */
+#final-line.steady { animation: none; }
 
 #epilogue {
   margin-top: 4rem;
@@ -363,7 +470,7 @@ section {
 
 @media (prefers-reduced-motion: reduce) {
   #final-line, #stars, .mist, #next-hint, .cloud,
-  .horse-sprite { animation: none !important; }
+  .horse-sprite, .breath, .meteor, .spark, .hoofprint { animation: none !important; }
   .stanza { transition-duration: .3s; }
   html { scroll-behavior: auto; }
 }
@@ -400,6 +507,8 @@ section {
     <path id="hill-main" fill="url(#hillGrad)"/>
   </svg>
 
+  <div id="hoofprints"></div>
+
   <div class="mist m1"></div>
 
   <!-- the aging horse -->
@@ -408,6 +517,8 @@ section {
       <div class="horse-sprite"></div>
     </div>
   </div>
+
+  <div id="fx"></div>
 
   <div class="mist m2"></div>
 </div>
@@ -421,14 +532,16 @@ section {
     <p class="tagline">تجربةٌ تفاعليّة</p>
     <p class="howto">
       مرِّرْ — أو انقرِ السهمَ — لتنزلَ مع الحصانِ مِن التلّة.<br>
-      مرِّرِ المؤشّرَ فوقَهُ يرمحْ مرّةً أخرى، وانقرْ غيمةً يَثِبْ إليها فيخمشْها.
+      مرِّرِ المؤشّرَ فوقَهُ يرمحْ مرّةً أخرى، وانقرْ غيمةً يَثِبْ إليها فيخمشْها.<br>
+      انقرِ الكلماتِ الذهبيّةَ في الأبياتِ يستجبْ لها الحصانُ،<br>
+      وانقرِ السماءَ يهوِ شهابٌ.
     </p>
   </section>
 
   <section>
     <div class="stanza">
       مِن تَلَّةٍ بيضاءَ يهبطُ<br>
-      عُرفُهُ المُبتلُّ يلهثُ؛<br>
+      عُرفُهُ المُبتلُّ <span class="word-action" data-act="breath">يلهثُ</span>؛<br>
       والعجيبةُ أن تعودَ الخيلُ غاضبةً<br>
       وساهمةً معًا<br>
       وتكونَ هالكةً وتزدادُ انتباها.
@@ -437,9 +550,9 @@ section {
 
   <section>
     <div class="stanza">
-      يسعى ويسعلُ<br>
+      يسعى و<span class="word-action" data-act="cough">يسعلُ</span><br>
       <em>يا إلهي</em><br>
-      نحن كنّا إن همزناهُ اختفى في لمحتينِ<br>
+      نحن كنّا إن <span class="word-action" data-act="vanish">همزناهُ</span> اختفى في لمحتينِ<br>
       فلا يُرى إلّا خيالًا واشتباها
     </div>
   </section>
@@ -453,10 +566,10 @@ section {
 
   <section>
     <div class="stanza">
-      وكأنَّهُ ومن الطفولةِ إن تعثّرَ<br>
+      وكأنَّهُ ومن الطفولةِ إن <span class="word-action" data-act="stumble">تعثّرَ</span><br>
       قد يموتُ مِن الحياءِ والاعتذارِ كإبنِ آدمَ<br>
-      ثمّ يرمحُ مرّةً أخرى<br>
-      فيخمشُ غيمةً ويَجُوزُها؛
+      ثمّ <span class="word-action" data-act="gallop">يرمحُ مرّةً أخرى</span><br>
+      <span class="word-action" data-act="scratch">فيخمشُ غيمةً</span> ويَجُوزُها؛
     </div>
   </section>
 
@@ -471,7 +584,7 @@ section {
 
   <section>
     <div class="stanza">
-      يسعى ويسعلُ؟!<br>
+      يسعى و<span class="word-action" data-act="cough">يسعلُ</span>؟!<br>
       يا إلهي! كيف يكتهلُ الفَتَيُّ بلمحةٍ<br>
       أم أنَّ كلَّ خسارةٍ تعني اكتهالاً في الزمانْ؟!
     </div>
@@ -482,7 +595,7 @@ section {
       مهلاً! وأَجِّلْ دمعةَ العينينِ، حاولْ مرَّةً أخرى<br>
       <span id="final-line">ولا تسقطْ تمامًا يا حصانْ!</span>
     </div>
-    <p id="epilogue">اقتربْ بالمؤشّر من السطرِ الأخير…</p>
+    <p id="epilogue">اقتربْ بالمؤشّر من السطرِ الأخير… وانقرْهُ كي يثبتَ الحصانُ ولا يسقط.</p>
     <div id="signature">
       <div class="name">— مريد البرغوثي</div>
       <div class="meta">شاعر فلسطين · دير غسّانة</div>
@@ -498,6 +611,8 @@ section {
 <script>
 (function () {
   'use strict';
+
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- scene metrics & hill geometry ---------- */
   const hillsSvg = document.getElementById('hills');
@@ -569,11 +684,31 @@ section {
 
     updateGait(now, Math.abs(target - tCurrent) * W);
 
+    maybePrint(tCurrent);
     applyParallax();
     updateGlow();
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  /* ---------- hoofprints fading in the snow ---------- */
+  const printsLayer = document.getElementById('hoofprints');
+  let lastPrintX = T_START * W;
+
+  function maybePrint(t) {
+    const x = t * W;
+    if (Math.abs(x - lastPrintX) < 34) return;
+    lastPrintX = x;
+    if (REDUCED) return;
+    const p = document.createElement('div');
+    p.className = 'hoofprint';
+    p.style.left = (x - 6) + 'px';
+    p.style.top  = (hillTopY(t) - 4) + 'px';
+    p.style.transform = 'rotate(' + slopeAngleDeg(t).toFixed(1) + 'deg)';
+    printsLayer.appendChild(p);
+    if (printsLayer.children.length > 40) printsLayer.firstChild.remove();
+    setTimeout(() => p.remove(), 7200);
+  }
 
   /* ---------- gentle parallax ---------- */
   const stars = document.getElementById('stars');
@@ -605,39 +740,127 @@ section {
   horse.addEventListener('mouseenter', gallopBurst);
   horse.addEventListener('click', gallopBurst);
 
+  /* ---------- one-shot horse animations ---------- */
+  function playOnce(cls) {
+    if (REDUCED || horseInner.classList.contains(cls)) return;
+    horseInner.classList.add(cls);
+    horseInner.addEventListener('animationend',
+      () => horseInner.classList.remove(cls), { once: true });
+  }
+
   /* ---------- occasional stumble — but never a fall ---------- */
+  function triggerStumble() {
+    if (!horseInner.classList.contains('leap')) playOnce('stumble');
+  }
+
   function scheduleStumble() {
     setTimeout(() => {
-      if (!horseInner.classList.contains('leap') &&
-          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        horseInner.classList.add('stumble');
-        horseInner.addEventListener('animationend',
-          () => horseInner.classList.remove('stumble'), { once: true });
-      }
+      triggerStumble();
       scheduleStumble();
     }, 7000 + Math.random() * 6000);
   }
   scheduleStumble();
 
-  /* ---------- click a cloud: the horse leaps and scratches it ---------- */
-  document.querySelectorAll('.cloud').forEach(cloud => {
-    cloud.addEventListener('click', e => {
-      if (horseInner.classList.contains('leap')) return;
-      horseInner.classList.remove('stumble');
-      horseInner.classList.add('leap');
-      horseInner.addEventListener('animationend',
-        () => horseInner.classList.remove('leap'), { once: true });
+  /* ---------- breath vapour from the muzzle ---------- */
+  const fx = document.getElementById('fx');
 
-      const r = cloud.getBoundingClientRect();
-      const mark = document.createElement('div');
-      mark.className = 'scratch';
-      mark.style.left = Math.max(0, e.clientX - r.left - 18) + 'px';
-      mark.style.top  = Math.max(0, e.clientY - r.top - 14) + 'px';
-      cloud.appendChild(mark);
-      if (cloud.querySelectorAll('.scratch').length > 6) {
-        cloud.querySelector('.scratch').remove();
-      }
+  function breathe(n) {
+    if (REDUCED) return;
+    for (let i = 0; i < n; i++) {
+      setTimeout(() => {
+        const r = horse.getBoundingClientRect();
+        const b = document.createElement('div');
+        b.className = 'breath';
+        b.style.left = (r.left + r.width * 0.13 + (Math.random() * 10 - 5)) + 'px';
+        b.style.top  = (r.top + r.height * 0.24 + (Math.random() * 8 - 4)) + 'px';
+        fx.appendChild(b);
+        setTimeout(() => b.remove(), 1800);
+      }, i * 140);
+    }
+  }
+
+  (function ambientBreath() {                  // panting in the cold night
+    setTimeout(() => {
+      breathe(isGalloping ? 3 : 1);
+      ambientBreath();
+    }, 3500 + Math.random() * 3000);
+  })();
+
+  /* ---------- cough & vanish ---------- */
+  function cough() {
+    playOnce('cough');
+    breathe(4);
+  }
+
+  function vanish() {                          // gone in two blinks
+    gallopBurst();
+    horse.classList.add('vanish');
+    setTimeout(() => horse.classList.remove('vanish'), 1100);
+  }
+
+  /* ---------- click a cloud: the horse leaps and scratches it ---------- */
+  function leapAndScratch(cloud, cx, cy) {
+    if (horseInner.classList.contains('leap')) return;
+    horseInner.classList.remove('stumble');
+    horseInner.classList.add('leap');
+    horseInner.addEventListener('animationend',
+      () => horseInner.classList.remove('leap'), { once: true });
+
+    const r = cloud.getBoundingClientRect();
+    const mark = document.createElement('div');
+    mark.className = 'scratch';
+    mark.style.left = Math.max(0, cx - r.left - 18) + 'px';
+    mark.style.top  = Math.max(0, cy - r.top - 14) + 'px';
+    cloud.appendChild(mark);
+    if (cloud.querySelectorAll('.scratch').length > 6) {
+      cloud.querySelector('.scratch').remove();
+    }
+  }
+
+  const allClouds = Array.from(document.querySelectorAll('.cloud'));
+  allClouds.forEach(cloud => {
+    cloud.addEventListener('click', e => leapAndScratch(cloud, e.clientX, e.clientY));
+  });
+
+  function scratchRandomCloud() {
+    const visible = allClouds.filter(c => {
+      const r = c.getBoundingClientRect();
+      return r.right > 0 && r.left < W;
     });
+    const pool = visible.length ? visible : allClouds;
+    const cloud = pool[Math.floor(Math.random() * pool.length)];
+    const r = cloud.getBoundingClientRect();
+    leapAndScratch(cloud,
+      r.left + r.width  * (0.3 + Math.random() * 0.4),
+      r.top  + r.height * (0.3 + Math.random() * 0.4));
+  }
+
+  /* ---------- golden words in the poem command the horse ---------- */
+  const wordActions = {
+    breath:  () => breathe(5),
+    cough:   cough,
+    vanish:  vanish,
+    stumble: triggerStumble,
+    gallop:  gallopBurst,
+    scratch: scratchRandomCloud
+  };
+  document.querySelectorAll('.word-action').forEach(w => {
+    w.addEventListener('click', () => {
+      const act = wordActions[w.dataset.act];
+      if (act) act();
+    });
+  });
+
+  /* ---------- click the sky: a shooting star ---------- */
+  document.getElementById('scene').addEventListener('click', e => {
+    if (REDUCED || e.target.closest('.cloud, #horse')) return;
+    if (e.clientY > H * 0.55) return;          // only the sky, above the hill
+    const m = document.createElement('div');
+    m.className = 'meteor';
+    m.style.left = e.clientX + 'px';
+    m.style.top  = e.clientY + 'px';
+    fx.appendChild(m);
+    setTimeout(() => m.remove(), 1000);
   });
 
   /* ---------- stanza reveal on scroll ---------- */
@@ -671,12 +894,40 @@ section {
   }, { passive: true });
 
   function updateGlow() {
+    if (steadied) return;
     const r = finalLine.getBoundingClientRect();
     if (r.bottom < 0 || r.top > window.innerHeight) return;
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     const d = Math.hypot(mouseX - cx, mouseY - cy);
     const g = Math.max(0, Math.min(1, 1 - d / 340));
     finalLine.style.setProperty('--g', g.toFixed(3));
+  }
+
+  /* click the line: it steadies, the horse rears — and does not fall */
+  let steadied = false;
+  finalLine.addEventListener('click', () => {
+    steadied = true;
+    finalLine.classList.add('steady');
+    finalLine.style.setProperty('--g', '1');
+    playOnce('rear');
+    breathe(3);
+    sparkBurst(finalLine);
+  });
+
+  function sparkBurst(el) {
+    if (REDUCED) return;
+    const r = el.getBoundingClientRect();
+    for (let i = 0; i < 14; i++) {
+      const s = document.createElement('div');
+      s.className = 'spark';
+      s.style.left = (r.left + Math.random() * r.width) + 'px';
+      s.style.top  = (r.top + Math.random() * r.height) + 'px';
+      const a = Math.random() * Math.PI * 2, d = 40 + Math.random() * 70;
+      s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(0) + 'px');
+      s.style.setProperty('--dy', (Math.sin(a) * d - 30).toFixed(0) + 'px');
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1200);
+    }
   }
 
   /* ---------- soft wind sound (WebAudio, no asset) ---------- */

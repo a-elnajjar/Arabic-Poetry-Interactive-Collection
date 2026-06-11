@@ -70,6 +70,20 @@ on-steadfastness/
 
 ---
 
+### 5. حصانٌ يهبطُ من تلّةٍ بيضاء (A Horse Descends a White Hill)
+
+A dark cinematic single-file experience of a poem about an aging horse descending a misty white hill at dusk. An SVG horse silhouette breathes, occasionally stumbles (but never falls), raises its head proudly on hover, and leaps to scratch clouds when they're clicked — leaving faint hoof marks. Arabic-only verses (Amiri font) fade in like mist on scroll, ending in a trembling «ولا تسقطْ تمامًا يا حصانْ!» that glows as the cursor approaches. Includes gentle parallax and a synthesized wind-sound toggle.
+
+**Files**
+```
+horse-poem/
+└── index.html   — fully self-contained single file (markup, styles, and JS inline)
+```
+
+🐎 **[View live page](https://a-elnajjar.github.io/Arabic-Poetry-Interactive-Collection/horse-poem/index.html)**
+
+---
+
 ## Structure
 
 ```
@@ -77,6 +91,7 @@ maritime-poem/          — Nizar Qabbani poem (القصيدة البحرية)
 ThinkofOthers/          — Mahmoud Darwish poem (فكِّر بغيرك)
 notebook-poem/          — Nizar Qabbani poem (سيدتي)
 on-steadfastness/       — Mahmoud Darwish poem (عن الصمود)
+horse-poem/             — single-file horse poem (حصانٌ يهبطُ من تلّةٍ بيضاء)
 README.md
 ```
 

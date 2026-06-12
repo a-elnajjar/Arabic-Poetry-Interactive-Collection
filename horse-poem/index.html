@@ -6,7 +6,8 @@
 <title>حصانٌ يهبطُ من تلّةٍ بيضاء — مريد البرغوثي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/common.css">
 <link rel="preload" as="image" href="assets/horse-sprites.png">
 <style>
 /* ============================================================
@@ -31,7 +32,26 @@ body {
   background: var(--night);
   color: var(--ink);
   overflow-x: hidden;
+  cursor: default;            /* this page has no custom cursor element */
 }
+
+/* English text — per project convention */
+.en-content { font-family: 'Cormorant Garamond', serif; }
+.stanza .en-content { line-height: 2.1; }
+
+/* language toggle — page palette on top of shared/common.css base */
+.lang-toggle {
+  top: 1.1rem; right: 1.1rem;
+  background: rgba(16, 18, 24, 0.55);
+  border-color: rgba(201, 168, 106, 0.35);
+}
+.lang-toggle .slider { background: rgba(201, 168, 106, 0.22); }
+.lang-toggle button {
+  font-family: 'Amiri', serif;
+  color: var(--ink-dim);
+  cursor: pointer;
+}
+.lang-toggle button.active { color: var(--gold-bright); }
 
 /* ---------- fixed cinematic scene ---------- */
 #scene {
@@ -433,7 +453,7 @@ section > * { pointer-events: auto; }
 /* ---------- controls ---------- */
 #wind-toggle {
   position: fixed;
-  top: 1.1rem; inset-inline-start: 1.1rem;
+  top: 1.1rem; left: 1.1rem;  /* physical: keeps its corner when dir flips */
   z-index: 20;
   background: rgba(16, 18, 24, 0.55);
   border: 1px solid rgba(201, 168, 106, 0.35);
@@ -447,6 +467,14 @@ section > * { pointer-events: auto; }
 }
 #wind-toggle:hover { border-color: var(--gold); color: var(--gold-bright); }
 #wind-toggle.on { color: var(--gold-bright); border-color: var(--gold); }
+
+/* wind-button labels: one per language × state (custom classes so they
+   don't collide with the shared ar-content/en-content visibility rules) */
+#wind-toggle .label { display: none; }
+body.lang-ar #wind-toggle:not(.on) .ar-off,
+body.lang-ar #wind-toggle.on  .ar-on,
+body.lang-en #wind-toggle:not(.on) .en-off,
+body.lang-en #wind-toggle.on  .en-on { display: inline; }
 
 #next-hint {
   position: fixed;
@@ -476,7 +504,14 @@ section > * { pointer-events: auto; }
 }
 </style>
 </head>
-<body>
+<body class="lang-ar">
+
+<!-- ======================= language toggle ======================= -->
+<div class="lang-toggle ar" id="langToggle">
+  <div class="slider"></div>
+  <button class="en" data-lang="en">EN</button>
+  <button class="ar active" data-lang="ar">ع</button>
+</div>
 
 <!-- ======================= fixed scene ======================= -->
 <div id="scene" aria-hidden="true">
@@ -524,90 +559,169 @@ section > * { pointer-events: auto; }
 </div>
 
 <!-- ======================= poem ======================= -->
-<main id="poem">
+<main id="poem" class="poem">
 
   <section id="title-card">
-    <p class="poet">مريد البرغوثي · ١٩٤٤—٢٠٢١</p>
-    <h1>حصانٌ يهبطُ<br>من تلّةٍ بيضاء</h1>
-    <p class="tagline">تجربةٌ تفاعليّة</p>
+    <p class="poet">
+      <span class="ar-content">مريد البرغوثي · ١٩٤٤—٢٠٢١</span>
+      <span class="en-content">Mourid Barghouti · 1944—2021</span>
+    </p>
+    <h1>
+      <span class="ar-content">حصانٌ يهبطُ<br>من تلّةٍ بيضاء</span>
+      <span class="en-content">A Horse Descends<br>from a White Hill</span>
+    </h1>
+    <p class="tagline">
+      <span class="ar-content">تجربةٌ تفاعليّة</span>
+      <span class="en-content">An interactive experience</span>
+    </p>
     <p class="howto">
-      مرِّرْ — أو انقرِ السهمَ — لتنزلَ مع الحصانِ مِن التلّة.<br>
-      مرِّرِ المؤشّرَ فوقَهُ يرمحْ مرّةً أخرى، وانقرْ غيمةً يَثِبْ إليها فيخمشْها.<br>
-      انقرِ الكلماتِ الذهبيّةَ في الأبياتِ يستجبْ لها الحصانُ،<br>
-      وانقرِ السماءَ يهوِ شهابٌ.
+      <span class="ar-content">
+        مرِّرْ — أو انقرِ السهمَ — لتنزلَ مع الحصانِ مِن التلّة.<br>
+        مرِّرِ المؤشّرَ فوقَهُ يرمحْ مرّةً أخرى، وانقرْ غيمةً يَثِبْ إليها فيخمشْها.<br>
+        انقرِ الكلماتِ الذهبيّةَ في الأبياتِ يستجبْ لها الحصانُ،<br>
+        وانقرِ السماءَ يهوِ شهابٌ.
+      </span>
+      <span class="en-content">
+        Scroll — or click the arrow — to descend the hill with the horse.<br>
+        Hover over him and he gallops again; click a cloud and he leaps to scratch it.<br>
+        Click the golden words in the verses and the horse obeys,<br>
+        and click the sky to set a star falling.
+      </span>
     </p>
   </section>
 
   <section>
     <div class="stanza">
-      مِن تَلَّةٍ بيضاءَ يهبطُ<br>
-      عُرفُهُ المُبتلُّ <span class="word-action" data-act="breath">يلهثُ</span>؛<br>
-      والعجيبةُ أن تعودَ الخيلُ غاضبةً<br>
-      وساهمةً معًا<br>
-      وتكونَ هالكةً وتزدادُ انتباها.
+      <span class="ar-content">
+        مِن تَلَّةٍ بيضاءَ يهبطُ<br>
+        عُرفُهُ المُبتلُّ <span class="word-action" data-act="breath">يلهثُ</span>؛<br>
+        والعجيبةُ أن تعودَ الخيلُ غاضبةً<br>
+        وساهمةً معًا<br>
+        وتكونَ هالكةً وتزدادُ انتباها.
+      </span>
+      <span class="en-content">
+        Down a white hill he descends,<br>
+        his wet mane <span class="word-action" data-act="breath">panting</span>;<br>
+        and the wonder is that horses come back angry<br>
+        and pensive at once —<br>
+        perishing, yet ever more alert.
+      </span>
     </div>
   </section>
 
   <section>
     <div class="stanza">
-      يسعى و<span class="word-action" data-act="cough">يسعلُ</span><br>
-      <em>يا إلهي</em><br>
-      نحن كنّا إن <span class="word-action" data-act="vanish">همزناهُ</span> اختفى في لمحتينِ<br>
-      فلا يُرى إلّا خيالًا واشتباها
+      <span class="ar-content">
+        يسعى و<span class="word-action" data-act="cough">يسعلُ</span><br>
+        <em>يا إلهي</em><br>
+        نحن كنّا إن <span class="word-action" data-act="vanish">همزناهُ</span> اختفى في لمحتينِ<br>
+        فلا يُرى إلّا خيالًا واشتباها
+      </span>
+      <span class="en-content">
+        He strains and <span class="word-action" data-act="cough">coughs</span><br>
+        <em>dear God</em><br>
+        once, at the slightest <span class="word-action" data-act="vanish">nudge</span>, he vanished in two blinks,<br>
+        seen only as a phantom, a blur
+      </span>
     </div>
   </section>
 
   <section>
     <div class="stanza">
-      مترفعٌ وكأنَّهُ فيما يظنُّ هو الأميرُ<br>
-      ويحسبُ الأمراءَ خيلاً عندهُ
+      <span class="ar-content">
+        مترفعٌ وكأنَّهُ فيما يظنُّ هو الأميرُ<br>
+        ويحسبُ الأمراءَ خيلاً عندهُ
+      </span>
+      <span class="en-content">
+        Haughty — as though, in his own mind, he were the prince,<br>
+        and counted the princes as horses of his stable
+      </span>
     </div>
   </section>
 
   <section>
     <div class="stanza">
-      وكأنَّهُ ومن الطفولةِ إن <span class="word-action" data-act="stumble">تعثّرَ</span><br>
-      قد يموتُ مِن الحياءِ والاعتذارِ كإبنِ آدمَ<br>
-      ثمّ <span class="word-action" data-act="gallop">يرمحُ مرّةً أخرى</span><br>
-      <span class="word-action" data-act="scratch">فيخمشُ غيمةً</span> ويَجُوزُها؛
+      <span class="ar-content">
+        وكأنَّهُ ومن الطفولةِ إن <span class="word-action" data-act="stumble">تعثّرَ</span><br>
+        قد يموتُ مِن الحياءِ والاعتذارِ كإبنِ آدمَ<br>
+        ثمّ <span class="word-action" data-act="gallop">يرمحُ مرّةً أخرى</span><br>
+        <span class="word-action" data-act="scratch">فيخمشُ غيمةً</span> ويَجُوزُها؛
+      </span>
+      <span class="en-content">
+        As though, since childhood, were he to <span class="word-action" data-act="stumble">stumble</span><br>
+        he might die of shame and apology, like a son of Adam,<br>
+        then <span class="word-action" data-act="gallop">gallop once more</span> —<br>
+        <span class="word-action" data-act="scratch">scratching a cloud</span> and passing beyond it;
+      </span>
     </div>
   </section>
 
   <section>
     <div class="stanza">
-      وكأنّهُ أكذوبةُ الرومانس:<br>
-      صارت حافرًا ومدًى، وتُلمَسُ.<br>
-      أو جلاميدُ امرئ القيسِ التي كرَّتْ وفرَّتْ<br>
-      في صِباها..
+      <span class="ar-content">
+        وكأنّهُ أكذوبةُ الرومانس:<br>
+        صارت حافرًا ومدًى، وتُلمَسُ.<br>
+        أو جلاميدُ امرئ القيسِ التي كرَّتْ وفرَّتْ<br>
+        في صِباها..
+      </span>
+      <span class="en-content">
+        As though he were the fable of romance<br>
+        become hoof and horizon — and touchable.<br>
+        Or Imru' al-Qays's boulders that charged and wheeled<br>
+        in their youth…
+      </span>
     </div>
   </section>
 
   <section>
     <div class="stanza">
-      يسعى و<span class="word-action" data-act="cough">يسعلُ</span>؟!<br>
-      يا إلهي! كيف يكتهلُ الفَتَيُّ بلمحةٍ<br>
-      أم أنَّ كلَّ خسارةٍ تعني اكتهالاً في الزمانْ؟!
+      <span class="ar-content">
+        يسعى و<span class="word-action" data-act="cough">يسعلُ</span>؟!<br>
+        يا إلهي! كيف يكتهلُ الفَتَيُّ بلمحةٍ<br>
+        أم أنَّ كلَّ خسارةٍ تعني اكتهالاً في الزمانْ؟!
+      </span>
+      <span class="en-content">
+        He strains and <span class="word-action" data-act="cough">coughs</span>?!<br>
+        Dear God! How does the young one age in a glance —<br>
+        or does every loss mean a sudden aging in time?!
+      </span>
     </div>
   </section>
 
   <section id="final-section">
     <div class="stanza">
-      مهلاً! وأَجِّلْ دمعةَ العينينِ، حاولْ مرَّةً أخرى<br>
-      <span id="final-line">ولا تسقطْ تمامًا يا حصانْ!</span>
+      <span class="ar-content">مهلاً! وأَجِّلْ دمعةَ العينينِ، حاولْ مرَّةً أخرى<br></span>
+      <span class="en-content">Gently! Postpone the tears of your eyes — try once more,<br></span>
+      <span id="final-line">
+        <span class="ar-content">ولا تسقطْ تمامًا يا حصانْ!</span>
+        <span class="en-content">and do not fall completely, O horse!</span>
+      </span>
     </div>
-    <p id="epilogue">اقتربْ بالمؤشّر من السطرِ الأخير… وانقرْهُ كي يثبتَ الحصانُ ولا يسقط.</p>
+    <p id="epilogue">
+      <span class="ar-content">اقتربْ بالمؤشّر من السطرِ الأخير… وانقرْهُ كي يثبتَ الحصانُ ولا يسقط.</span>
+      <span class="en-content">Bring the cursor near the last line… and click it, so the horse holds steady and does not fall.</span>
+    </p>
     <div id="signature">
-      <div class="name">— مريد البرغوثي</div>
-      <div class="meta">شاعر فلسطين · دير غسّانة</div>
+      <div class="name">
+        <span class="ar-content">— مريد البرغوثي</span>
+        <span class="en-content">— Mourid Barghouti</span>
+      </div>
+      <div class="meta">
+        <span class="ar-content">شاعر فلسطين · دير غسّانة</span>
+        <span class="en-content">Poet of Palestine · Deir Ghassana</span>
+      </div>
     </div>
   </section>
 
 </main>
 
 <!-- ======================= controls ======================= -->
-<button id="wind-toggle" aria-pressed="false" aria-label="تشغيل صوت الريح">🌬️ صوت الريح</button>
+<button id="wind-toggle" aria-pressed="false" aria-label="تشغيل صوت الريح">🌬️
+  <span class="label ar-off">صوت الريح</span><span class="label ar-on">الريح تهبّ…</span><span class="label en-off">Wind sound</span><span class="label en-on">Wind blowing…</span>
+</button>
 <button id="next-hint" aria-label="المقطع التالي">▼</button>
 
+<script src="../shared/common.js"></script>
 <script>
 (function () {
   'use strict';
@@ -974,7 +1088,6 @@ section > * { pointer-events: auto; }
     if (windOn) audioCtx.resume(); else audioCtx.suspend();
     windBtn.classList.toggle('on', windOn);
     windBtn.setAttribute('aria-pressed', String(windOn));
-    windBtn.textContent = windOn ? '🌬️ الريح تهبّ…' : '🌬️ صوت الريح';
   });
 })();
 </script>

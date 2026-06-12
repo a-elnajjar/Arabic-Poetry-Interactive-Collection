@@ -72,12 +72,12 @@ on-steadfastness/
 
 ### 5. حصانٌ يهبطُ من تلّةٍ بيضاء — مريد البرغوثي (A Horse Descends a White Hill — Mourid Barghouti)
 
-A dark cinematic experience of Barghouti's poem about an aging horse descending a misty white hill at dusk. A sprite-sheet horse silhouette (16 hand-drawn frames: an 8-frame walk cycle and an 8-frame gallop) walks down the hill as you scroll — leaving fading hoofprints in the snow and panting visible breath in the cold air — breaks into a gallop when the scroll drags it fast or on hover, occasionally stumbles (but never falls), and leaps to scratch clouds when they're clicked, leaving faint hoof marks. Golden words inside the verses command the horse: click «يلهثُ» and it pants, «يسعلُ» and it coughs, «همزناهُ» and it vanishes in a flash, «تعثّرَ» and it stumbles, «يرمحُ مرّةً أخرى» and it gallops, «فيخمشُ غيمةً» and it leaps at a cloud. Clicking the night sky drops a shooting star. Arabic-only verses (Amiri font) fade in like mist on scroll, ending in a trembling «ولا تسقطْ تمامًا يا حصانْ!» that glows as the cursor approaches — and, when clicked, steadies in a burst of gold sparks while the horse rears and refuses to fall. Includes gentle parallax and a synthesized wind-sound toggle.
+A dark cinematic experience of Barghouti's poem about an aging horse descending a misty white hill at dusk. A sprite-sheet horse silhouette (16 hand-drawn frames: an 8-frame walk cycle and an 8-frame gallop) walks down the hill as you scroll — leaving fading hoofprints in the snow and panting visible breath in the cold air — breaks into a gallop when the scroll drags it fast or on hover, occasionally stumbles (but never falls), and leaps to scratch clouds when they're clicked, leaving faint hoof marks. Golden words inside the verses command the horse: click «يلهثُ» and it pants, «يسعلُ» and it coughs, «همزناهُ» and it vanishes in a flash, «تعثّرَ» and it stumbles, «يرمحُ مرّةً أخرى» and it gallops, «فيخمشُ غيمةً» and it leaps at a cloud. Clicking the night sky drops a shooting star. Bilingual verses (Amiri for Arabic, Cormorant Garamond for English, AR/EN toggle via the shared language switch) fade in like mist on scroll, ending in a trembling «ولا تسقطْ تمامًا يا حصانْ!» that glows as the cursor approaches — and, when clicked, steadies in a burst of gold sparks while the horse rears and refuses to fall. Includes gentle parallax and a synthesized wind-sound toggle.
 
 **Files**
 ```
 horse-poem/
-├── index.html                 — markup, styles, and JS inline
+├── index.html                 — markup, styles, and JS inline (uses shared/common.js + common.css for the AR/EN toggle)
 └── assets/horse-sprites.png   — 8×2 sprite sheet (440×320 frames: walk row, gallop row)
 ```
 
